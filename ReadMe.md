@@ -12,7 +12,7 @@
 | Remote command execution |  | `Invoke-Command -Computername $RemoteComputer -ScriptBlock { Get-ChildItem "C:\Program Files" }` |
 | Take VMWare snapshots |  | `$VMs = Get-VM SEARCH_PATTERN, New-Snapshot -VM $VMs -Name "SNAPSHOT NAME" -Description "SNAPSHOT DESCRIPTION"` |
 | Remove VMWare snapshots dry-run |  | `get-vm -Name *PRD*ENG* | get-snapshot | where {$_.Name -match "SNAPSHOT_NAME"} | remove-snapshot –whatif` |
-| Add CA at Machine level | `curl -k URL_TO_DOWNLOAD_PEM > /etc/pki/ca-trust/source/anchors/FILE_NAME && update-ca-trust && certutil -A -d /etc/pki/nssdb -n 'NAME OF THE CA' -t CT,C,C -a -i /etc/pki/ca-trust/source/anchors/FILE_NAME PIPE certutil -machine -accept Certchain.p7b` | `certutil -machine -accept Certchain.p7b` |
+| Add CA at Machine level | `curl -k URL_TO_DOWNLOAD_PEM > /etc/pki/ca-trust/source/anchors/FILE_NAME && update-ca-trust && certutil -A -d /etc/pki/nssdb -n 'NAME OF THE CA' -t CT,C,C -a -i /etc/pki/ca-trust/source/anchors/FILE_NAME.pem` | `certutil -machine -accept Certchain.p7b` |
 | DNS Lookups | `dig -x 8.8.8.8`, `dig @8.8.8.8 domainName`, `dig @8.8.8.8 +norecurse domainName`, `dig @8.8.8.8 +trace domainName` | `nslookup domainName` |
 | Find the default executable that gets picked up | `which` | `where` |
 | System wide temp location |  | `%TEMP%` |
@@ -51,7 +51,7 @@
 | IP Patterns | `0.0.0.0/0` - All IPv4 addresses, `::0/0`- All IPv6 addresses, `0.0.0.0:80` - On any network interface on port 80 |
 | Find external IP address | `curl -kLvvv https://ifconfig.co/json` |
 | Open up a TCP socket and listen for connections | `nc -l 192.168.2.1 3000` |
-| Packet capture from within Network namespace  |  `nsenter -t 19941 -n tcpdump -i any -s0 -nn -A -w /tmp/appName.pcap and port 443`, `nsenter -t 11016 -p tcpdump -i any -s0 -A -nn host IP_ADDRESS`, `nsenter -t 39526 -n tcpdump -i any -s0 -nn -A host IP_ADDRESS -w /tmp/appName.pcap and port 443`, `nsenter -t 11019 -n tcpdump -i any -s0 -nn -A host IP_ADDRESS -w /tmp/appName.pcap and port 8080`, `nsenter -t 120644 -n tcpdump -i any -nn -R http -2`, `nsenter -t 120644 -n tcpdump -i any -nn -R dns -2`, `nsenter -t 120644 -n tcpdump -i any -nn -R ssl -2`, `nsenter -t 31179 -n tshark -i any -nn -R 'http.request.method == "GET" || http.request.method == "HEAD" || http.request.method == "POST" || http'`, `nsenter -t 31179 -n tshark -i any -nn -R 'tcp.analysis.retransmission or tcp.analysis.fast_retransmission'`,`nsenter -t 120644 -n tshark -i any -nn host -A -s0 127.0.0.1 and port 8081` |
+| Packet capture from within Network namespace  |  `nsenter -t PID -n tcpdump -i any -s0 -nn -A -w /tmp/appName.pcap and port 443`, `nsenter -t PID -p tcpdump -i any -s0 -A -nn host IP_ADDRESS`, `nsenter -t PID -n tcpdump -i any -s0 -nn -A host IP_ADDRESS -w /tmp/appName.pcap and port 443`, `nsenter -t PID -n tcpdump -i any -s0 -nn -A host IP_ADDRESS -w /tmp/appName.pcap and port 8080`, `nsenter -t PID -n tcpdump -i any -nn -R http -2`, `nsenter -t PID -n tcpdump -i any -nn -R dns -2`, `nsenter -t PID -n tcpdump -i any -nn -R ssl -2`, `nsenter -t PID -n tshark -i any -nn -R 'http.request.method == "GET" || http.request.method == "HEAD" || http.request.method == "POST" || http'`, `nsenter -t PID -n tshark -i any -nn -R 'tcp.analysis.retransmission or tcp.analysis.fast_retransmission'`,`nsenter -t PID -n tshark -i any -nn host -A -s0 127.0.0.1 and port 8081` |
 
 
 | Description |  Detail |
