@@ -12,7 +12,7 @@
 | Remote command execution |  | `Invoke-Command -Computername $RemoteComputer -ScriptBlock { Get-ChildItem "C:\Program Files" }` |
 | Take VMWare snapshots |  | `$VMs = Get-VM SEARCH_PATTERN, New-Snapshot -VM $VMs -Name "SNAPSHOT NAME" -Description "SNAPSHOT DESCRIPTION"` |
 | Remove VMWare snapshots dry-run |  | `get-vm -Name *PRD*ENG* | get-snapshot | where {$_.Name -match "SNAPSHOT_NAME"} | remove-snapshot –whatif` |
-| Add CA at Machine level | `curl -k URL_TO_DOWNLOAD_PEM > /etc/pki/ca-trust/source/anchors/FILE_NAME && update-ca-trust && certutil -A -d /etc/pki/nssdb -n 'NAME OF THE CA' -t CT,C,C -a -i /etc/pki/ca-trust/source/anchors/FILE_NAME.pem` | `certutil -machine -accept Certchain.p7b` |
+| Add CA at Machine level into nss db | `curl -k URL_TO_DOWNLOAD_PEM > /etc/pki/ca-trust/source/anchors/FILE_NAME && update-ca-trust && certutil -A -d /etc/pki/nssdb -n 'NAME OF THE CA' -t CT,C,C -a -i /etc/pki/ca-trust/source/anchors/FILE_NAME.pem` | `certutil -machine -accept Certchain.p7b` |
 | DNS Lookups | `dig -x 8.8.8.8`, `dig @8.8.8.8 domainName`, `dig @8.8.8.8 +norecurse domainName`, `dig @8.8.8.8 +trace domainName` | `nslookup domainName` |
 | Find the default executable that gets picked up | `which` | `where` |
 | System wide temp location |  | `%TEMP%` |
@@ -71,9 +71,49 @@
 | Execute tasks by tag | `ansible-playbook example.yml --tags "configuration,packages"` |
 
 
+
 | Description |  Detail |
 | --- | --- |
-| Check firmware type i.e is it BIOS or UEFI | `dmesg | more` and `dmidecode | more` |
+| Drain a node | `oc adm drain <node1> <node2>` |
+| List Elasticsearch Indices | `oc exec POD_NAME -- es_util --query /_cat/indices` |
+| List Elasticsearch Aliases | `oc exec POD_NAME -- es_util --query /_cat/aliases` |
+| Scale a deployment config | `oc scale dc DC_NAME --replicas=N` |
+| Update timeout at a route leve | `oc annotate route ROUTE_NAME --overwrite haproxy.router.openshift.io/timeout=180s` |
+| Debug into a deployment config | `oc debug dc/DC_NAME` |
+| Force edit a label | `oc label node NODE_NAME --overwrite key=value` |
+| Mark nodes are schedulable or not | `oc adm manage-node NODE_NAME  --schedulable=true` or `oc adm manage-node NODE_NAME  --schedulable=false` |
+| Force delete a pod | `oc delete pod --grace-period=0 --force --namespace NAMESPACE_NAME POD_NAME` |
+| Sync Users via LDAP dry run | `oadm groups sync --sync-config=ldap_group_sync.yml` |
+| Sync Users via LDAP | `oadm groups sync --sync-config=ldap_group_sync.yml --confirm` |
+| etcd cluster health | `etcdctl -C https://etcd1:2379,https://etcd2:2379,https://etcd3:2379 --ca-file=/etc/origin/master/master.etcd-ca.crt --cert-file=/etc/origin/master/master.etcd-client.crt --key-file=/etc/origin/master/master.etcd-client.key cluster-health` |
+| etcd member list | `etcdctl -C https://etcd1:2379,https://etcd2:2379,https://etcd3:2379 --ca-file=/etc/origin/master/master.etcd-ca.crt --cert-file=/etc/origin/master/master.etcd-client.crt --key-file=/etc/origin/master/master.etcd-client.key member list` |
+| Filter nodes by selector | `oc get nodes --selector="logging-infra-fluentd=true"` |
+| Open vSwitch dump flows | `ovs-ofctl -O OpenFlow13 dump-flows br0` |
+| Get endpoints across the cluster | `oc get endpoints --all-namespaces -o wide` |
+| Get all Router IP addresses | `oc get pods --all-namespaces --selector=router --template='{{range.items}}HostIP: {{.status.hostIP}} PodIP: {{.status.podIP}}{{"\n"}}{{end}}'` |
+| Add cluster role to a user group | `oadm policy add-cluster-role-to-group cluster-admin USERGROUP_NAME` |
+| Get Elasticsearch Indices | `oc exec -n logging ES_PODNAME -- curl -s   --cacert /etc/elasticsearch/secret/admin-ca   --cert /etc/elasticsearch/secret/admin-cert   --key /etc/elasticsearch/secret/admin-key   https://localhost:9200/_cat/indices` |
+| Remove role from a user | `oadm policy remove-role-from-user cluster-admin USER_NAME` |
+| Remove cluster role from a user | `oadm policy remove-cluster-role-from-user admin USER_NAME` |
+| Open vSwitch list bridges | `ovs-vsctl list-br` |
+| Open vSwitch Dump ports | `ovs-ofctl -O OpenFlow13 dump-ports-desc br0` |
+| Get host and pod IP | `oc get pods --selector=docker-registry --template='{{range .items}}HostIP: {{.status.hostIP}}   PodIP: {{.status.podIP}}{{end}}{{"\n"}}'` |
+| Pruning old deployments | `oadm prune deployments --confirm` or `oc adm prune deployments --confirm` |
+| Get Quotas for a namespace | `oc get quota` |
+| Get Limits for a namespace | `oc get limits` |
+| Delete user | `oc delete USER_NAME` - remove cluster role bindings for the user, remove namespaced role bindings for the user, remove the user from any sccs, remove the user from any groups, remove the user but leave identities for the user |
+| Delete Identity | `oc delete identity USER_NAME` |
+| Delete group | `oc delete group GROUP_NAME` - remove cluster role bindings for the group, remove namespaced role bindings for the group, remove the group from any sccs, remove the group|
+| Delete using selector | `oc delete templates --selector="metrics-infra"` or `oc delete all --selector="metrics-infra"` |
+| Get using selector | `oc get all --selector="metrics-infra"` |
+| Get cluster level events | `oc get events -w` |
+| Follow logs of a Container within a POD | `oc logs -f POD_NAME -c CONTAINER_NAME` |
+| Get all persistent volume claims - Reports Bind Status, Capacity, AccessModes and Volume info | `oc get pvc --all-namespaces` |
+| Get Persistent Volumes across the cluster - Reports PV Name, Capacity, Access Modes, Reclaim Policy, Status, Claim Name| `oc get pv` |
+
+| Description |  Detail |
+| --- | --- |
+| Check firmware type i.e is it BIOS or UEFI | `dmesg \| more` and `dmidecode \| more` |
 | SCSI re-scan | `ls /sys/class/scsi_host` and `echo "- - -" > /sys/class/scsi_host/host#/scan` |
 | Check architecture | `uname -m` |
 | List available locales | `locale -a` |
@@ -87,13 +127,13 @@
 | System level I/O wait | `top` |
 | Sample useradd | `sudo /usr/sbin/useradd --create-home --home-dir /usr/local/username --shell /bin/bash username` |
 | Change shell for a user | `chsh -s /bin/bash nginx` |
-| Sort files and directories size and limit find depth to 2 | `find -maxdepth 2 -type d -exec du -sm {} \; | sort -nr` |
+| Sort files and directories size and limit find depth to 2 | `find -maxdepth 2 -type d -exec du -sm {} \; \| sort -nr` |
 | List available shells | `cat /etc/shells` |
 | SSH Tunnels - Local Port forwarding | `ssh -L local_port:remote_address:remote_port user@server.com` |
 | SSH Tunnels - Remote Port forwarding | `ssh -R remote_port:local_address:local_port user@server.com` |
 | SSH Tunnels - Dynamic Port forwarding | `ssh -D local_port username@server.com` |
 | Show volumes on a NAS with exports | `showmount -e NAS_SERVER_NAME` |
-| Binary zipping - Reduces size my more than 10 times! | `bzip2 -7 dockerd-core.1998` |
+| Binary zipping - compresses to a great extent! | `bzip2 -7 dockerd-core.1998` |
 | Yum show duplicates | `yum --showduplicates list telnet` |
 | Yum with disable repos | `yum update-minimal --security --disablerepo=rhel-7-server-ose-3.4-rpms` |
 | Number of file descriptors/fd the kernel will allocate before choking | `cat /proc/sys/fs/file-max` |
@@ -133,3 +173,31 @@
 | xmllint validation | `xmllint --valid --encode utf-8 Autounattend.xml` |
 | xslt transformation | `xml tr test.xsl test.xml` |
 | xml inplace editing | `xml ed --inplace -u "//ovf:VirtualSystem/ovf:OperatingSystemSection/ovf:Description" -v "THIS IS A TEST1" test.xml` |
+
+| Description |  Detail |
+| --- | --- |
+| Enable protocol specific functions in HP Performance Center Load Generator | `<Load Generator install>\merc_asl\*.asl where * signifies the relevant protocol. To add a new function to the lists of allowed functions for a Load Generator, add a new line to the relevant protocol list file containing the function name with an appended = character as follows: <function_name>=` |
+| Enable general C function or Specific Load Runner function in HP Performance Center Load Generator | `For general LoadRunner (lr) or C functions append the function with an equal sign on a new line to the end of the file "lrun_api.asl". Example: To add a function called "fopen", add the following to the end of the file "lrun_api.asl": fopen=` |
+
+
+| Description |  Detail |
+| --- | --- |
+| List databases along with their tablespace names | `\l+` |
+| List users | `\du` |
+| List schemas | `\dn` |
+| List tables | `\dt` |
+| Find database size | `SELECT pg_size_pretty( pg_database_size('jira') );` |
+| Create Role | `CREATE USER "INSERT_USERNAME" WITH LOGIN ENCRYPTED PASSWORD 'INSERT_PASSWORD' NOSUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION VALID UNTIL 'infinity';` |
+| Create DB with custom encoding and collation | `CREATE DATABASE "INSERT_DBNAME" WITH OWNER = "INSERT_DBOWNER" ENCODING = 'UTF8' LC_COLLATE = 'en_AU.UTF-8' LC_CTYPE = 'en_AU.UTF-8' TABLESPACE = pg_default CONNECTION LIMIT = 40;` |
+| Grant Connect | `GRANT SELECT ON ALL TABLES IN SCHEMA public TO INSERT_USERNAME;` |
+| Identify the collation type for each database | `select datname, datcollate from pg_database;` |
+| Pause DB replication | `select pg_xlog_replay_pause()` |
+| Resume DB replication | `select pg_xlog_replay_resume()` |
+| Dump/Export database | `pg_dump --host PgSQLDumpDB.dbHostIP --port PgSQLDumpDB.dbListenPort --username PgSQLDumpDB.dbUserName --no-password --format plain --blobs --verbose  --file=../output/+PgSQLDumpDB.dbName+_dbDump_original.sql PgSQLDumpDB.dbName` |
+| List schemas | `\dn` |
+| List schemas | `\dn` |
+
+
+
+
+
