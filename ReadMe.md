@@ -66,7 +66,7 @@
 | Description |  Detail |
 | --- | --- |
 | Anisble gather facts | `ansible IntS -kv -u root -m setup --tree /tmp/facts` |
-| Execute a playbook in verbose mode | ` ansible-playbook -i /etc/ansible/hosts playbook.yml -vvv | tee installation-log.txt` |
+| Execute a playbook in verbose mode | `ansible-playbook -i /etc/ansible/hosts playbook.yml -vvv PIPE tee installation-log.txt` |
 | Skip tags example  | `ansible-playbook -kv -i INVENTORY_FILE_PATH -e "target=parent:children" --skip-tags "SKIPME" playbook.yml` |
 | Execute tasks by tag | `ansible-playbook example.yml --tags "configuration,packages"` |
 
