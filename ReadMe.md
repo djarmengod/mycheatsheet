@@ -48,10 +48,16 @@
 
 | Description |  Detail |
 | --- | --- |
-| IP Patterns | `0.0.0.0/0` - All IPv4 addresses, `::0/0`- All IPv6 addresses, `0.0.0.0:80` - On any network interface on port 80 |
+| IP Patterns | `0.0.0.0/0` - All IPv4 addresses, `::0/0` - All IPv6 addresses, `::1` - for localhost in ipv6, `0.0.0.0:80` - On any network interface on port 80 |
 | Find external IP address | `curl -kLvvv https://ifconfig.co/json` |
 | Open up a TCP socket and listen for connections | `nc -l 192.168.2.1 3000` |
 | Packet capture from within Network namespace  |  `nsenter -t PID -n tcpdump -i any -s0 -nn -A -w /tmp/appName.pcap and port 443`, `nsenter -t PID -p tcpdump -i any -s0 -A -nn host IP_ADDRESS`, `nsenter -t PID -n tcpdump -i any -s0 -nn -A host IP_ADDRESS -w /tmp/appName.pcap and port 443`, `nsenter -t PID -n tcpdump -i any -s0 -nn -A host IP_ADDRESS -w /tmp/appName.pcap and port 8080`, `nsenter -t PID -n tcpdump -i any -nn -R http -2`, `nsenter -t PID -n tcpdump -i any -nn -R dns -2`, `nsenter -t PID -n tcpdump -i any -nn -R ssl -2`, `nsenter -t PID -n tshark -i any -nn -R 'http.request.method == "GET" || http.request.method == "HEAD" || http.request.method == "POST" || http'`, `nsenter -t PID -n tshark -i any -nn -R 'tcp.analysis.retransmission or tcp.analysis.fast_retransmission'`,`nsenter -t PID -n tshark -i any -nn host -A -s0 127.0.0.1 and port 8081` |
+| Find out which network interface to internet. Same can be used to find a route to a particular host. | `route get 8.8.8.8` |
+| Display the authoritative (primary) name server | Use the -type=soa option  ex: `nslookup -type=soa google.com` |
+
+
+Use the -type=soa option to tell nslookup to display the authoritative (primary) name server.
+
 
 
 | Description |  Detail |
@@ -62,6 +68,17 @@
 | Auto start compose services | `crontab -e @reboot /usr/local/bin/docker-compose -f /etc/docker-compose.yml up -d Restart` |
 | Docker GC using Sotify's image | `docker run --privileged --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc:ro spotify/docker-gc` |
 | Image layer details/history | `docker history --no-trunc IMAGE_ID` |
+| Send a specific Kill signal to a container | `docker kill -s SIGKILL containerName` |
+| Deleting all containers | `docker rm $(docker ps -aq)` |
+| Stop all containers | `docker stop $(docker ps -q)` |
+| Delete all images including intermediate ones | `docker rmi -f $(docker images -q)` |
+| To remove an image which has multiple tags - here all the tags and the image itself will be removed. | `docker rmi --force ` |
+| Dockerfile declare instructions to be executed when building a child image. | Use `ONBUILD` instruction |
+| List all Privileged containers. | `for name in `docker ps | awk '{print $NF}'`; do echo "$name --> $(docker inspect $name | grep -i Privileged)";  done` |
+
+
+
+
 
 | Description |  Detail |
 | --- | --- |
@@ -110,6 +127,39 @@
 | Follow logs of a Container within a POD | `oc logs -f POD_NAME -c CONTAINER_NAME` |
 | Get all persistent volume claims - Reports Bind Status, Capacity, AccessModes and Volume info | `oc get pvc --all-namespaces` |
 | Get Persistent Volumes across the cluster - Reports PV Name, Capacity, Access Modes, Reclaim Policy, Status, Claim Name| `oc get pv` |
+| Edit objects| `oc edit = oc get -o + oc apply (if we save)` |
+| oc rsh | It uses Openshift Master API to create a secure tunnel to the remote pod and does not require ssh or the rsh unix commands. |
+| oc cp | requires the container image to provide tar as it copies entire directory by default and if tar isnt available the command fails. |
+| oc patch dc/dcname | Patching a DC results in automatic re-deployment of Pods. |
+| To use VSCode as the editor when you do edits with kubectl | `export KUBE_EDITOR="code"` |
+| Join Projects | `oc adm pod-network join-projects --to=master-project sub-project` |
+| Isolate Projects | `oc adm pod-network isolate-projects project1 project2` |
+| Global projects - In the above example, all the pods and services in project1 and project2 can now access any pods and services in the cluster and vice versa. | `oc adm pod-network make-projects-global project1 project2` |
+| Idling a service - all idling right now is manual. OCP will never automatically idle a service + Idle the service -- Request comes in -- Service gets activated -- Service remains activated until we Idle it again.| `oc idle svc/myservice` |
+| Granting roles to users and service accounts | OCP allows you to grant roles to users and serviceaccounts that do not exist yet. |
+| oc describe | `oc describe` can follow relationships ex: Describe on bc will display recent builds where are "oc get -o" wont be able to do this. |
+| SCC - Security Context Constrains | SCC control what actions a Pod can perform on which resources. |
+| Deployment config enable trigger | `oc set triggers dc/dcname --from-config` |
+| Deployment config disable trigger | `oc set triggers dc/dcname --from-config remove` |
+| Process a template and output objects in a text format | `oc process -f TEMPLATE.yml` |
+| Process a template and create resources | `oc process -f FILENAME| oc create -f -` |
+| Process a template and create resources with custom parameter values | `oc process -f my-rails-postgresql -p POSTGRESQL_USER=bob -p POSTGRESQL_DATABASE=mydatabase | oc create -f -` |
+| Process a template based on param values from a file | `oc process -f my-rails-postgresql --param-file=postgres.env` |
+| Manual build | `oc start-build bc/BCNAME` |
+| Manual deploy | `oc rollout dc/DCNAME` |
+| Exposing a service on a particular domain name | `oc expose svc/SERVIC_NAME --hostname test.example.com.au` |
+| Default behavior wrt to domain name during service exposure | `{SERVICENAME}-{PROJECTNAME}.{ROUTINGSUBDOMAIN}` |
+| Readiness and Liveness probes are applied to the DC. | This will help with various deployment options esp for Stateful workloads |
+| Get all objects with a particular label | `oc get all -l app=nodejs-ex` |
+| Build from a specific branch | `oc new-app GITURL#BRANCHNAME` |
+| Specify a builder image that needs to be used for building this app | `oc new-app nodejs:8~GITURL` |
+| Print the resource definitions that will be created | `oc new-app -o json GITURL --name SAMPLEAPP > sampleapp_defn.json` |
+| Set triggers from CLI | `oc set triggers dc/frontend --from-image=myproject/origin-ruby-sample:latest -c helloworld` |
+| To cancel the build which is running or pending in the queue. | `oc cancel-build NAME` - This terminates the build pod (if running) so no new image is pushed and no deployment is triggered. |
+| Create a new ImageStream with all the labels attached to the image from a insecure registry | `oc import-image NEW_IS --confirm --insecure --from registry.example.com:5000/myimage --all` |
+| Update an image stream and image stream tags based on values from an external registry | `oc import-image` - This results in image change events which could trigger the linked Builds and/or Deployments that refer to this image stream.|
+| Roll back a deployment | `oc rollout undo dc/DCNAME` - The DC template will be reverted to match the deployment revision specified in the undo command, and a new replication controller will be started.|
+| To re-enable the image change triggers | `oc set triggers dc/DCNAME --auto` - Image change triggers on the DC are disabled as part of the rollback to prevent accidentally starting a new deployment process immediately after the rollback is complete.|
 
 | Description |  Detail |
 | --- | --- |
