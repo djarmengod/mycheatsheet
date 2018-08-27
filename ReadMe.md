@@ -44,7 +44,8 @@
 | Import P7b into JKS | `keytool -importcert -alias ALIAS -trustcacerts -file FullChainOfCerts.p7b -keystore newkeystore.jks –storetype JKS` |
 | Import cert and trust | `keytool -import -trustcacerts -keystore cacerts -alias ALIAS -file cert.pem` |
 | Match keys | Assuming you have the public keys inside x.509 certificates, and assuming they are RSA keys, then for each public key, do, `openssl x509 -in certfile -modulus -noout`. For each private key, do `openssl rsa -in keyfile -modulus -noout`. Then match the keys by modulus. |
-
+| Generate random password | For base64 based `openssl rand -base64 10` and for hexa-decimal based `openssl rand -hex 10` |
+| NPM ignore ssl warnings/errors | `npm config set strict-ssl false` |
 
 | Description |  Detail |
 | --- | --- |
@@ -88,6 +89,13 @@ Use the -type=soa option to tell nslookup to display the authoritative (primary)
 | Execute tasks by tag | `ansible-playbook example.yml --tags "configuration,packages"` |
 
 
+
+| Description |  Detail |
+| --- | --- |
+| List AZ's for a given region ex: For us-east-2 | `aws ec2 describe-availability-zones --region us-east-2` |
+| List regions | `aws ec2 describe-regions` |
+| List buckets | `aws s3api list-buckets` | 
+| List AMI id's from a region | Owners = 309956199498 is the account ID used to show Red Hat images `aws ec2 describe-images --owners 309956199498 --query 'Images[*].[CreationDate,Name,ImageId]' --filters "Name=name,Values=RHEL-7.?*GA*" --region us-east-2 --output table | sort -r` |
 
 | Description |  Detail |
 | --- | --- |
@@ -206,7 +214,7 @@ Use the -type=soa option to tell nslookup to display the authoritative (primary)
 | Delete local branch | `git branch -d <BRANCH_NAME>` |
 | Rebase local branch - rebase option to avoid a superfluous “merge commit” | `git pull --rebase` |
 | Show remote origin | `git remote show origin` |
-| Set remote URL | `git remote set-url origin https://USER@github.com/scm/project/project.git` and `cat ./config` |
+| Set remote URL | `git remote set-url origin https://USER@github.com/scm/project/project.git` and `cat ./config` and `git remote -v`|
 | Set git user name | `git config --global user.name "USER.NAME"` |
 | Set git user mail | `git config --global user.email "USER.MAIL"` |
 | Delete local branch | `git branch -d branch_name` |
@@ -214,8 +222,8 @@ Use the -type=soa option to tell nslookup to display the authoritative (primary)
 | Create new local branch and push to remote | `git checkout -b BRANCH_NAME` and `git push -u origin BRANCH_NAME` |
 | List all *new or modified* files | `git status` |
 | Show file differences that **haven't been** staged | `git diff` |
-
-
+| To unstage a file which was staged for commit | `git reset HEAD somewhere/somefile.someextension` - File goes back to being not staged for commit|
+| Show files in a commit | `git show --pretty="" --name-only c1035fdddc1d7eb4486c2ac9733fc15943362cce` |
 
 | Description |  Detail |
 | --- | --- |
