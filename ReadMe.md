@@ -91,7 +91,7 @@
 
 | Description |  Linux | Windows |
 | --- | --- | --- |
-| Find size of files/directories recursively | `du -ah ~/Downloads/ | sort -rh | head -10` or `find . -type f -printf "%s\t%p\n" | sort -nr` | `Get-ChildItem | Where-Object { $_.PSIsContainer } | ForEach-Object { $_.Name + ": " + "{0:N2}" -f ((Get-ChildItem $_ -Recurse | Measure-Object Length -Sum -ErrorAction SilentlyContinue).Sum / 1MB) + " MB" }` |
+| Find size of files/directories recursively | du -ah ~/Downloads/ | sort -rh | head -10` or `find . -type f -printf "%s\t%p\n" | sort -nr | Get-ChildItem | Where-Object { $_.PSIsContainer } | ForEach-Object { $_.Name + ": " + "{0:N2}" -f ((Get-ChildItem $_ -Recurse | Measure-Object Length -Sum -ErrorAction SilentlyContinue).Sum / 1MB) + " MB" } |
 | Find checksum | `cksum FILE_NAME`, `md5sum FILE_NAME`, `sha512sum FILE_NAME` | `CertUtil -hashfile pathToFileToCheck [HashAlgorithm]` ex: CertUtil -hashfile C:\TEMP\MyDataFile.img MD5 |
 | AD Manage users and computers |  | `dsa.msc` |
 | LDAP Browser / Query | `/usr/lib64/mozldap/ldapsearch -D "cn=directory manager" -w SECRET -p 636 -h server.example.com -b "dc=example,dc=com" -s sub "cn=user name / computer name"` | `adsiedit` |
@@ -128,6 +128,10 @@
 | List regions | `aws ec2 describe-regions` |
 | List buckets | `aws s3api list-buckets` | 
 | List AMI id's from a region | Owners = 309956199498 is the account ID used to show Red Hat images `aws ec2 describe-images --owners 309956199498 --query 'Images[*].[CreationDate,Name,ImageId]' --filters "Name=name,Values=RHEL-7.?*GA*" --region us-east-2 --output table PIPE sort -r` |
+| Remove aws configured credentials | `rm -f ~/.aws/credentials ~/.aws/config` | 
+| Uninstall aws cli | sudo rm -rf /usr/local/aws && sudo rm /usr/local/bin/aws |
+| List images with ENA support + owners filter | `aws ec2 describe-images --owners 309956199498 PIPE jq '.Images[] PIPE select(.EnaSupport == true)'` |
+| List image names with ENA support + owners filter | `aws ec2 describe-images --owners 309956199498 PIPE jq '.Images[] PIPE select(.EnaSupport == true) | .Name'` |
 
 
 | Description |  Detail |
@@ -227,6 +231,13 @@
 | xmllint validation | `xmllint --valid --encode utf-8 Autounattend.xml` |
 | xslt transformation | `xml tr test.xsl test.xml` |
 | xml inplace editing | `xml ed --inplace -u "//ovf:VirtualSystem/ovf:OperatingSystemSection/ovf:Description" -v "THIS IS A TEST1" test.xml` |
+
+| Description |  Detail |
+| --- | --- |
+| List available subscriptions | `subscription-manager list --available` |
+| List attached subscriptions | `subscription-manager list` |
+| List available repositories | `subscription-manager repos --list` |
+| Attach to a specific pool | `subscription-manager attach --pool=POOL_ID` |
 
 
 | Description |  Detail |
