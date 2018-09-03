@@ -23,6 +23,7 @@
 | Binary zipping - compresses to a great extent! | `bzip2 -7 dockerd-core.1998` |
 | Yum show duplicates | `yum --showduplicates list telnet` |
 | Yum with disable repos | `yum update-minimal --security --disablerepo=rhel-7-server-ose-3.4-rpms` |
+| Yum cache removals | `yum clean all && rm -rf /var/cache/yum`  rm -rf to also free up space taken by orphaned data from disabled or removed repos. or `yum clean expire-cache` |
 | Number of file descriptors/fd the kernel will allocate before choking | `cat /proc/sys/fs/file-max` |
 | Copy out a portion of log file | `awk 'NR >= 57890000 && NR <= 57890010' /path/to/file` |
 | Bulk find and replace within a file | `sed -i -e '/central.database =/ s/= .*/= new_value/' /path/to/file` |
@@ -124,6 +125,7 @@
 
 | Description |  Detail |
 | --- | --- |
+| AWS S3 Transfer acceleration | `aws s3 cp installer.jar.gz s3://bucketname/keyname --region ap-southeast-2 --endpoint-url http://s3-buckets-acceleration-endpoint-name` |
 | List AZ's for a given region ex: For us-east-2 | `aws ec2 describe-availability-zones --region us-east-2` |
 | List regions | `aws ec2 describe-regions` |
 | List buckets | `aws s3api list-buckets` | 
@@ -154,6 +156,7 @@
 | Get endpoints across the cluster | `oc get endpoints --all-namespaces -o wide` |
 | Get all Router IP addresses | `oc get pods --all-namespaces --selector=router --template='{{range.items}}HostIP: {{.status.hostIP}} PodIP: {{.status.podIP}}{{"\n"}}{{end}}'` |
 | Add cluster role to a user group | `oadm policy add-cluster-role-to-group cluster-admin USERGROUP_NAME` |
+| Add cluster role to a user | `oc adm policy add-cluster-role-to-user cluster-admin USER_NAME` |
 | Get Elasticsearch Indices | `oc exec -n logging ES_PODNAME -- curl -s   --cacert /etc/elasticsearch/secret/admin-ca   --cert /etc/elasticsearch/secret/admin-cert   --key /etc/elasticsearch/secret/admin-key   https://localhost:9200/_cat/indices` |
 | Remove role from a user | `oadm policy remove-role-from-user cluster-admin USER_NAME` |
 | Remove cluster role from a user | `oadm policy remove-cluster-role-from-user admin USER_NAME` |
