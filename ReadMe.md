@@ -36,6 +36,8 @@
 | Selinux get booleans | `getsebool -a PIPE grep httpd` |
 | Selinux get container selinux package versions | `rpm -qa *container*selinux*` |
 | RHEL Atomic Vulnerability Scan | `atomic scan` |
+| sos report to a custom path | `mkdir /root/sos && sosreport --tmp-dir /root/sos` |
+| List contents of an xz file | `tar -tvJf /var/tmp/sosreport-KiranM.1234-20180905005434.tar.xz` -J deals with the xz files and -j is to filter the archive through bzip2 |
 
 
 | Description |  Command |
@@ -157,9 +159,12 @@
 | Get all Router IP addresses | `oc get pods --all-namespaces --selector=router --template='{{range.items}}HostIP: {{.status.hostIP}} PodIP: {{.status.podIP}}{{"\n"}}{{end}}'` |
 | Add cluster role to a user group | `oadm policy add-cluster-role-to-group cluster-admin USERGROUP_NAME` |
 | Add cluster role to a user | `oc adm policy add-cluster-role-to-user cluster-admin USER_NAME` |
+| Get rolebinding | Project level rolebindings `oc get rolebindings` and Cluster level rolebindings `oc get clusterrolebindings` |
+| Role binding to Groups | oc adm policy `add-role-to-group` `remove-role-from-group` `add-cluster-role-to-group` `remove-cluster-role-from-group`|
+| Role binding to Users | oc adm policy `add-role-to-user` `remove-role-from-user` `add-cluster-role-to-user` `remove-cluster-role-from-user`|
 | Get Elasticsearch Indices | `oc exec -n logging ES_PODNAME -- curl -s   --cacert /etc/elasticsearch/secret/admin-ca   --cert /etc/elasticsearch/secret/admin-cert   --key /etc/elasticsearch/secret/admin-key   https://localhost:9200/_cat/indices` |
-| Remove role from a user | `oadm policy remove-role-from-user cluster-admin USER_NAME` |
-| Remove cluster role from a user | `oadm policy remove-cluster-role-from-user admin USER_NAME` |
+| Remove Cluster admin role from a user | `oadm policy remove-role-from-user cluster-admin USER_NAME` |
+| Remove Project level admin role from a user | `oadm policy remove-cluster-role-from-user admin USER_NAME` |
 | Open vSwitch list bridges | `ovs-vsctl list-br` |
 | Open vSwitch Dump ports | `ovs-ofctl -O OpenFlow13 dump-ports-desc br0` |
 | Get host and pod IP | `oc get pods --selector=docker-registry --template='{{range .items}}HostIP: {{.status.hostIP}}   PodIP: {{.status.podIP}}{{end}}{{"\n"}}'` |
@@ -196,7 +201,8 @@
 | Manual build | `oc start-build bc/BCNAME` |
 | Manual deploy | `oc rollout dc/DCNAME` |
 | Exposing a service on a particular domain name | `oc expose svc/SERVIC_NAME --hostname test.example.com.au` |
-| Default behavior wrt to domain name during service exposure | `{SERVICENAME}-{PROJECTNAME}.{ROUTINGSUBDOMAIN}` |
+| Default behavior wrt to domain name/DNS during service exposure | `{SERVICENAME}-{PROJECTNAME}.{ROUTINGSUBDOMAIN}` |
+| Version and health check for API server via CURL | Healthz `curl -k https://OCP-DOMAINNAME:8443/healthz` and Version `curl -k https://OCP-DOMAINNAME:8443/version` | 
 | Readiness and Liveness probes are applied to the DC. | This will help with various deployment options esp for Stateful workloads |
 | Get all objects with a particular label | `oc get all -l app=nodejs-ex` |
 | Build from a specific branch | `oc new-app GITURL#BRANCHNAME` |
@@ -208,6 +214,12 @@
 | Update an image stream and image stream tags based on values from an external registry | `oc import-image` - This results in image change events which could trigger the linked Builds and/or Deployments that refer to this image stream.|
 | Roll back a deployment | `oc rollout undo dc/DCNAME` - The DC template will be reverted to match the deployment revision specified in the undo command, and a new replication controller will be started.|
 | To re-enable the image change triggers | `oc set triggers dc/DCNAME --auto` - Image change triggers on the DC are disabled as part of the rollback to prevent accidentally starting a new deployment process immediately after the rollback is complete.|
+| Project level exports | `oc export all -o json > project.json` for JSON and `oc export all -o yaml > project.yaml` for YAML |
+| Export other project level objects | `for object in rolebindings serviceaccounts secrets imagestreamtags podpreset cms egressnetworkpolicies rolebindingrestrictions limitranges resourcequotas pvcs templates cronjobs statefulsets hpas deployments replicasets poddisruptionbudget endpoints do; oc export $object -o yaml > $object.yaml done;` |
+| Deployment config enable trigger | `oc set triggers dc/dcname --from-config` |
+
+
+
 
 
 | Description |  Detail |
@@ -226,7 +238,7 @@
 | Show file differences that **haven't been** staged | `git diff` |
 | To unstage a file which was staged for commit | `git reset HEAD somewhere/somefile.someextension` - File goes back to being not staged for commit|
 | Show files in a commit | `git show --pretty="" --name-only c1035fdddc1d7eb4486c2ac9733fc15943362cce` |
-
+| Git check ignore | `git check-ignore *` | 
 
 | Description |  Detail |
 | --- | --- |
