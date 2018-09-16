@@ -107,7 +107,7 @@
 | Take VMWare snapshots |  | `$VMs = Get-VM SEARCH_PATTERN, New-Snapshot -VM $VMs -Name "SNAPSHOT NAME" -Description "SNAPSHOT DESCRIPTION"` |
 | Remove VMWare snapshots dry-run |  | `get-vm -Name *PRD*ENG* | get-snapshot | where {$_.Name -match "SNAPSHOT_NAME"} | remove-snapshot –whatif` |
 | Add CA at Machine level into nss db | `curl -k URL_TO_DOWNLOAD_PEM > /etc/pki/ca-trust/source/anchors/FILE_NAME && update-ca-trust && certutil -A -d /etc/pki/nssdb -n 'NAME OF THE CA' -t CT,C,C -a -i /etc/pki/ca-trust/source/anchors/FILE_NAME.pem` | `certutil -machine -accept Certchain.p7b` |
-| DNS Lookups | `dig -x 8.8.8.8`, `dig @8.8.8.8 domainName`, `dig @8.8.8.8 +norecurse domainName`, `dig @8.8.8.8 +trace domainName` | `nslookup domainName` |
+| DNS Lookups | `dig -x 8.8.8.8`, `dig @8.8.8.8 domainName`, `dig @8.8.8.8 +norecurse domainName`, `dig @8.8.8.8 +trace domainName` | `nslookup domainName` using a specific DNS resolver `nslookup domainname 8.8.8.8`|
 | Find the default executable that gets picked up | `which` | `where` |
 | System wide temp location |  | `%TEMP%` |
 | Find processes with handles on a particular file or set of files | `fuser` | `sysinternal's handle tool` ex: Here this finds the PID with handlee on log files and kills the processes `for /f "skip=4 tokens=3" %i in ('handle ..\logs\') do taskkill /pid %i` |
