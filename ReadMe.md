@@ -26,7 +26,8 @@
 | Yum cache removals | `yum clean all && rm -rf /var/cache/yum`  rm -rf to also free up space taken by orphaned data from disabled or removed repos. or `yum clean expire-cache` |
 | Number of file descriptors/fd the kernel will allocate before choking | `cat /proc/sys/fs/file-max` |
 | Copy out a portion of log file | `awk 'NR >= 57890000 && NR <= 57890010' /path/to/file` |
-| Bulk find and replace within a file | `sed -i -e '/central.database =/ s/= .*/= new_value/' /path/to/file` |
+| Bulk find and replace a line within a file | `sed -i -e '/central.database =/ s/= .*/= new_value/' /path/to/file` |
+| Bulk find and replace a string within a file | `sed -i 's/old-text/new-text/g' /path/to/file` |
 | nohup details | Nohupping backgrounded jobs is typically used to avoid terminating them when logging off from a remote SSH session. A different issue that often arises in this situation is that ssh is refusing to log off ("hangs"), since it refuses to lose any data from/to the background job(s). This problem can also be overcome by redirecting all three I/O streams Example: `nohup ./myprogram > foo.out 2> foo.err < /dev/null &` Also note that a closing SSH session does not always send a HUP signal to depending processes. Among others, this depends on whether a pseudo-terminal was allocated or not. You can use screen for that. Just create a screen session with: `screen -S rsync` then, you detach your screen with CTRL+A and you can disconnect from SSH |
 | Selinux check for exceptions and provide explanation | `cat /var/log/audit/audit.log* PIPE audit2allow --explain` |
 | Selinux get details | `sestatus` |
@@ -107,7 +108,7 @@
 | Take VMWare snapshots |  | `$VMs = Get-VM SEARCH_PATTERN, New-Snapshot -VM $VMs -Name "SNAPSHOT NAME" -Description "SNAPSHOT DESCRIPTION"` |
 | Remove VMWare snapshots dry-run |  | `get-vm -Name *PRD*ENG* | get-snapshot | where {$_.Name -match "SNAPSHOT_NAME"} | remove-snapshot –whatif` |
 | Add CA at Machine level into nss db | `curl -k URL_TO_DOWNLOAD_PEM > /etc/pki/ca-trust/source/anchors/FILE_NAME && update-ca-trust && certutil -A -d /etc/pki/nssdb -n 'NAME OF THE CA' -t CT,C,C -a -i /etc/pki/ca-trust/source/anchors/FILE_NAME.pem` | `certutil -machine -accept Certchain.p7b` |
-| DNS Lookups | `dig -x 8.8.8.8`, `dig @8.8.8.8 domainName`, `dig @8.8.8.8 +norecurse domainName`, `dig @8.8.8.8 +trace domainName` | `nslookup domainName` using a specific DNS resolver `nslookup domainname 8.8.8.8`|
+| DNS Lookups | `dig -x 8.8.8.8`, `dig @8.8.8.8 domainName`, `dig @8.8.8.8 +norecurse domainName`, `dig @8.8.8.8 +trace domainName`, `dig +trace any @8.8.8.8 domainName` | `nslookup domainName` using a specific DNS resolver `nslookup domainname 8.8.8.8`|
 | Find the default executable that gets picked up | `which` | `where` |
 | System wide temp location |  | `%TEMP%` |
 | Find processes with handles on a particular file or set of files | `fuser` | `sysinternal's handle tool` ex: Here this finds the PID with handlee on log files and kills the processes `for /f "skip=4 tokens=3" %i in ('handle ..\logs\') do taskkill /pid %i` |
@@ -246,6 +247,8 @@
 | xmllint validation | `xmllint --valid --encode utf-8 Autounattend.xml` |
 | xslt transformation | `xml tr test.xsl test.xml` |
 | xml inplace editing | `xml ed --inplace -u "//ovf:VirtualSystem/ovf:OperatingSystemSection/ovf:Description" -v "THIS IS A TEST1" test.xml` |
+| yaml validation | `ruby -e "require 'yaml';puts YAML.load_file('cf_ocp_1M1A_NoVolAtt.yaml')"` |
+
 
 | Description |  Detail |
 | --- | --- |
