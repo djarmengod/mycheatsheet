@@ -150,26 +150,26 @@
 | Force edit a label | `oc label node NODE_NAME --overwrite key=value` |
 | Mark nodes are schedulable or not | `oc adm manage-node NODE_NAME  --schedulable=true` or `oc adm manage-node NODE_NAME  --schedulable=false` |
 | Force delete a pod | `oc delete pod --grace-period=0 --force --namespace NAMESPACE_NAME POD_NAME` |
-| Sync Users via LDAP dry run | `oadm groups sync --sync-config=ldap_group_sync.yml` |
-| Sync Users via LDAP | `oadm groups sync --sync-config=ldap_group_sync.yml --confirm` |
+| Sync Users via LDAP dry run | `oc adm groups sync --sync-config=ldap_group_sync.yml` |
+| Sync Users via LDAP | `oc adm groups sync --sync-config=ldap_group_sync.yml --confirm` |
 | etcd cluster health | `etcdctl -C https://etcd1:2379,https://etcd2:2379,https://etcd3:2379 --ca-file=/etc/origin/master/master.etcd-ca.crt --cert-file=/etc/origin/master/master.etcd-client.crt --key-file=/etc/origin/master/master.etcd-client.key cluster-health` |
 | etcd member list | `etcdctl -C https://etcd1:2379,https://etcd2:2379,https://etcd3:2379 --ca-file=/etc/origin/master/master.etcd-ca.crt --cert-file=/etc/origin/master/master.etcd-client.crt --key-file=/etc/origin/master/master.etcd-client.key member list` |
 | Filter nodes by selector | `oc get nodes --selector="logging-infra-fluentd=true"` |
 | Open vSwitch dump flows | `ovs-ofctl -O OpenFlow13 dump-flows br0` |
 | Get endpoints across the cluster | `oc get endpoints --all-namespaces -o wide` |
 | Get all Router IP addresses | `oc get pods --all-namespaces --selector=router --template='{{range.items}}HostIP: {{.status.hostIP}} PodIP: {{.status.podIP}}{{"\n"}}{{end}}'` |
-| Add cluster role to a user group | `oadm policy add-cluster-role-to-group cluster-admin USERGROUP_NAME` |
+| Add cluster role to a user group | `oc adm policy add-cluster-role-to-group cluster-admin USERGROUP_NAME` |
 | Add cluster role to a user | `oc adm policy add-cluster-role-to-user cluster-admin USER_NAME` |
 | Get rolebinding | Project level rolebindings `oc get rolebindings` and Cluster level rolebindings `oc get clusterrolebindings` |
 | Role binding to Groups | oc adm policy `add-role-to-group` `remove-role-from-group` `add-cluster-role-to-group` `remove-cluster-role-from-group`|
 | Role binding to Users | oc adm policy `add-role-to-user` `remove-role-from-user` `add-cluster-role-to-user` `remove-cluster-role-from-user`|
 | Get Elasticsearch Indices | `oc exec -n logging ES_PODNAME -- curl -s   --cacert /etc/elasticsearch/secret/admin-ca   --cert /etc/elasticsearch/secret/admin-cert   --key /etc/elasticsearch/secret/admin-key   https://localhost:9200/_cat/indices` |
-| Remove Cluster admin role from a user | `oadm policy remove-role-from-user cluster-admin USER_NAME` |
-| Remove Project level admin role from a user | `oadm policy remove-cluster-role-from-user admin USER_NAME` |
+| Remove Cluster admin role from a user | `oc adm policy remove-role-from-user cluster-admin USER_NAME` |
+| Remove Project level admin role from a user | `oc adm policy remove-cluster-role-from-user admin USER_NAME` |
 | Open vSwitch list bridges | `ovs-vsctl list-br` |
 | Open vSwitch Dump ports | `ovs-ofctl -O OpenFlow13 dump-ports-desc br0` |
 | Get host and pod IP | `oc get pods --selector=docker-registry --template='{{range .items}}HostIP: {{.status.hostIP}}   PodIP: {{.status.podIP}}{{end}}{{"\n"}}'` |
-| Pruning old deployments | `oadm prune deployments --confirm` or `oc adm prune deployments --confirm` |
+| Pruning old deployments | `oc adm prune deployments --confirm` or `oc adm prune deployments --confirm` |
 | Get Quotas for a namespace | `oc get quota` |
 | Get Limits for a namespace | `oc get limits` |
 | Delete user | `oc delete USER_NAME` - remove cluster role bindings for the user, remove namespaced role bindings for the user, remove the user from any sccs, remove the user from any groups, remove the user but leave identities for the user |
