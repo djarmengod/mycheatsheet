@@ -25,6 +25,8 @@
 | Yum with disable repos | `yum update-minimal --security --disablerepo=rhel-7-server-ose-3.4-rpms` |
 | Yum cache removals | `yum clean all && rm -rf /var/cache/yum`  rm -rf to also free up space taken by orphaned data from disabled or removed repos. or `yum clean expire-cache` |
 | Number of file descriptors/fd the kernel will allocate before choking | `cat /proc/sys/fs/file-max` |
+| Expand an LVM disk | Example `fdisk /dev/sdd` and `pvcreate /dev/sdd1` and `vgextend ROOTVG /dev/sdd1` and `lvextend -l +100%FREE /dev/ROOTVG/varlog` and `resize2fs /dev/ROOTVG/varlog` or `xfs_growfs /dev/ROOTVG/varlog` |
+| Create a new LVM disk | Example `fdisk /dev/nvme1n1` and `pvcreate /dev/nvme1n1p1` and `vgcreate vg01 /dev/nvme1n1p1` and `lvcreate -l 100%FREE -n lv01 vg01` and `mkfs -t xfs /dev/vg01/lv01` and `add "/dev/vg01/lv01 /work xfs defaults 0 0" to /etc/fstab` and `mount /dev/vg01/lv01 /work` |
 | Copy out a portion of log file | `awk 'NR >= 57890000 && NR <= 57890010' /path/to/file` |
 | Bulk find and replace a line within a file | `sed -i -e '/central.database =/ s/= .*/= new_value/' /path/to/file` |
 | Bulk find and replace a string within a file | `sed -i 's/old-text/new-text/g' /path/to/file` |
