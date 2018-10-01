@@ -258,7 +258,7 @@
 | List attached subscriptions | `subscription-manager list` |
 | List available repositories | `subscription-manager repos --list` |
 | Attach to a specific pool | `subscription-manager attach --pool=POOL_ID` |
-
+| Enable EPEL repos on RHEL | `subscription-manager repos --enable "rhel-*-optional-rpms" --enable "rhel-*-extras-rpms"` and `yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm` |
 
 | Description |  Detail |
 | --- | --- |
