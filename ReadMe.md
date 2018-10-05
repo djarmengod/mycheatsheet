@@ -282,3 +282,4 @@
 | Dump/Export database | `pg_dump --host PgSQLDumpDB.dbHostIP --port PgSQLDumpDB.dbListenPort --username PgSQLDumpDB.dbUserName --no-password --format plain --blobs --verbose  --file=../output/+PgSQLDumpDB.dbName+_dbDump_original.sql PgSQLDumpDB.dbName` |
 | List schemas | `\dn` |
 | Install pgbench | `yum install postgresql-contrib` |
+| Install postgresql server | `yum install postgresql-server` && `postgresql-setup initdb` && `systemctl enable postgresql.service` && `systemctl start postgresql.service` |
