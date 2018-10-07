@@ -283,3 +283,5 @@
 | List schemas | `\dn` |
 | Install pgbench | `yum install postgresql-contrib` |
 | Install postgresql server | `yum install postgresql-server` && `postgresql-setup initdb` && `systemctl enable postgresql.service` && `systemctl start postgresql.service` |
+| Create a populate tables for benchmark tests | `pgbench -i -s 50 dockertest` |
+| Run benchmark test | `pgbench -c 10 -j 2 -t 10000 dockertest` |
