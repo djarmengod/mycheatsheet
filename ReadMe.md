@@ -94,6 +94,10 @@
 | Dockerfile declare instructions to be executed when building a child image. | Use `ONBUILD` instruction |
 | List all Privileged containers. | `for name in `docker ps | awk '{print $NF}'`; do echo "$name --> $(docker inspect $name | grep -i Privileged)";  done` |
 
+| Description |  Detail |
+| --- | --- |
+| Vagrant new approach - sample for CentOS v7 | `vagrant init centos/7` a Vagrantfile with default config where the directory from which this command is run is synced to the VM (so beware), Followed by `vagrant up` |
+
 
 | Description |  Linux | Windows |
 | --- | --- | --- |
