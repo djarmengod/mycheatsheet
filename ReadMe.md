@@ -99,6 +99,11 @@
 | Vagrant new approach - sample for CentOS v7 | `vagrant init centos/7` a Vagrantfile with default config where the directory from which this command is run is synced to the VM (so beware), Followed by `vagrant up` |
 
 
+| Description |  Detail |
+| --- | --- |
+| Manage multiple versions of NodeJS using nvm | On MAC install nvm - `brew install nvm` for info about nvm `brew info nvm` for listing installed versions `nvm ls` for listing available versions to install `nvm ls-remote` to install a specific version `nvm install v8.12.0` |
+
+
 | Description |  Linux | Windows |
 | --- | --- | --- |
 | Find size of files/directories recursively | du -ah ~/Downloads/ | sort -rh | head -10` or `find . -type f -printf "%s\t%p\n" | sort -nr | Get-ChildItem | Where-Object { $_.PSIsContainer } | ForEach-Object { $_.Name + ": " + "{0:N2}" -f ((Get-ChildItem $_ -Recurse | Measure-Object Length -Sum -ErrorAction SilentlyContinue).Sum / 1MB) + " MB" } |
