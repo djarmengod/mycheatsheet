@@ -147,7 +147,7 @@
 | Remove aws configured credentials | `rm -f ~/.aws/credentials ~/.aws/config` | 
 | Uninstall aws cli | sudo rm -rf /usr/local/aws && sudo rm /usr/local/bin/aws |
 | List images with ENA support + owners filter | `aws ec2 describe-images --owners 309956199498 PIPE jq '.Images[] PIPE select(.EnaSupport == true)'` |
-| List image names with ENA support + owners filter | `aws ec2 describe-images --owners 309956199498 PIPE jq '.Images[] PIPE select(.EnaSupport == true) | .Name'` |
+| List image names with ENA support + owners filter | `aws ec2 describe-images --owners 309956199498 PIPE jq '.Images[] PIPE select(.EnaSupport == true) PIPE .Name'` |
 
 
 | Description |  Detail |
