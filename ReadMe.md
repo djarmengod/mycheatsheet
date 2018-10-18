@@ -8,7 +8,7 @@
 | List available encodings | `locale -m` |
 | Get PID of a process that has a handle on the file | `fuser FILE_NAME` |
 | Force reboot | `systemctl --force --force reboot` |
-| Files open by a specific process | `lsof -p PID` |
+| Files or Libraries opened/used by a specific process | `lsof -p PID` or to find the processes using a specific library `lsof /usr/lib64/libssh2.so.1` |
 | Disk level I/O wait | `iostat -x 5 10` (Print stats every 5 seconds for 10 times) |
 | Process level I/O wait | `iotop` |
 | System level I/O wait | `top` |
@@ -238,6 +238,7 @@
 | --- | --- |
 | Compare branches - Shows a brief overview of all the commits that are in some-feature that are not in master. | `git log --oneline master..some-feature` |
 | Delete local branch | `git branch -d <BRANCH_NAME>` |
+| Git unset password | `git config --global --unset user.password` |
 | Rebase local branch - rebase option to avoid a superfluous “merge commit” | `git pull --rebase` |
 | Show remote origin | `git remote show origin` |
 | Set remote URL | `git remote set-url origin https://USER@github.com/scm/project/project.git` and `cat ./config` and `git remote -v`|
