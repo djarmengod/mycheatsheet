@@ -239,6 +239,7 @@
 | --- | --- |
 | Compare branches - Shows a brief overview of all the commits that are in some-feature that are not in master. | `git log --oneline master..some-feature` |
 | Delete local branch | `git branch -d branch_name` |
+| Show git config | git config --list |
 | Delete remote branch | `git push origin --delete BRANCH_NAME` |
 | Git unset password | `git config --global --unset user.password` |
 | Rebase local branch - rebase option to avoid a superfluous “merge commit” | `git pull --rebase` |
