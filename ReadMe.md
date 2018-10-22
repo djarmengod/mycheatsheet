@@ -6,6 +6,7 @@
 | List available locales | `locale -a` |
 | Check current encoding | `locale charmap` |
 | List available encodings | `locale -m` |
+| Search for all SUID and SGID files | Run as root `find / -perm /u=s,g=s` | 
 | Get PID of a process that has a handle on the file | `fuser FILE_NAME` |
 | Force reboot | `systemctl --force --force reboot` |
 | Files or Libraries opened/used by a specific process | `lsof -p PID` or to find the processes using a specific library `lsof /usr/lib64/libssh2.so.1` |
@@ -237,15 +238,14 @@
 | Description |  Detail |
 | --- | --- |
 | Compare branches - Shows a brief overview of all the commits that are in some-feature that are not in master. | `git log --oneline master..some-feature` |
-| Delete local branch | `git branch -d <BRANCH_NAME>` |
+| Delete local branch | `git branch -d branch_name` |
+| Delete remote branch | `git push origin --delete BRANCH_NAME` |
 | Git unset password | `git config --global --unset user.password` |
 | Rebase local branch - rebase option to avoid a superfluous “merge commit” | `git pull --rebase` |
 | Show remote origin | `git remote show origin` |
 | Set remote URL | `git remote set-url origin https://USER@github.com/scm/project/project.git` and `cat ./config` and `git remote -v`|
 | Set git user name | `git config --global user.name "USER.NAME"` |
 | Set git user mail | `git config --global user.email "USER.MAIL"` |
-| Delete local branch | `git branch -d branch_name` |
-| Delete remote branch | `git push origin --delete BRANCH_NAME` |
 | Create new local branch and push to remote | `git checkout -b BRANCH_NAME` and `git push -u origin BRANCH_NAME` |
 | List all *new or modified* files | `git status` |
 | Show file differences that **haven't been** staged | `git diff` |
