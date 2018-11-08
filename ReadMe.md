@@ -23,6 +23,8 @@
 | Show volumes on a NAS with exports | `showmount -e NAS_SERVER_NAME` |
 | Binary zipping - compresses to a great extent! | `bzip2 -7 dockerd-core.1998` |
 | Yum show duplicates | `yum --showduplicates list telnet` |
+| Yum show duplicates | `yum deplist PACKAGE_NAME` |
+| Yum show duplicates | `yum repoinfo rhel-7-server-rpms` |
 | Yum with disable repos | `yum update-minimal --security --disablerepo=rhel-7-server-ose-3.4-rpms` |
 | Yum cache removals | `yum clean all && rm -rf /var/cache/yum`  rm -rf to also free up space taken by orphaned data from disabled or removed repos. or `yum clean expire-cache` |
 | Number of file descriptors/fd the kernel will allocate before choking | `cat /proc/sys/fs/file-max` |
