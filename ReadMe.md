@@ -11,6 +11,7 @@
 | Force reboot | `systemctl --force --force reboot` |
 | Files or Libraries opened/used by a specific process | `lsof -p PID` or to find the processes using a specific library `lsof /usr/lib64/libssh2.so.1` |
 | Disk level I/O wait | `iostat -x 5 10` (Print stats every 5 seconds for 10 times) |
+| wiping disks | wipefs - wipefs can erase filesystem, raid or partition-table signatures (magic strings) from the specified device to make the signatures invisible for libblkid. wipefs does not erase the filesystem itself nor any other data from the device. |
 | Process level I/O wait | `iotop` |
 | System level I/O wait | `top` |
 | Sample useradd | `sudo /usr/sbin/useradd --create-home --home-dir /usr/local/username --shell /bin/bash username` |
@@ -243,7 +244,7 @@
 | Delete local branch | `git branch -d branch_name` |
 | Show git config | git config --list |
 | Delete remote branch | `git push origin --delete BRANCH_NAME` |
-| Git unset password | `git config --global --unset user.password` |
+| Git unset or change password | `git config --global --unset user.password` |
 | Rebase local branch - rebase option to avoid a superfluous “merge commit” | `git pull --rebase` |
 | Show remote origin | `git remote show origin` |
 | Set remote URL | `git remote set-url origin https://USER@github.com/scm/project/project.git` and `cat ./config` and `git remote -v`|
