@@ -1,0 +1,77 @@
+| Drain a node | oc adm drain <node1> <node2> |
+| List Elasticsearch Indices | oc exec POD_NAME -- es_util --query /_cat/indices |
+| List Elasticsearch Aliases | oc exec POD_NAME -- es_util --query /_cat/aliases |
+| Scale a deployment config | oc scale dc DC_NAME --replicas=N |
+| Update timeout at a route leve | oc annotate route ROUTE_NAME --overwrite haproxy.router.openshift.io/timeout=180s |
+| Debug into a deployment config | oc debug dc/DC_NAME |
+| Force edit a label | oc label node NODE_NAME --overwrite key=value |
+| Mark nodes are schedulable or not | oc adm manage-node NODE_NAME  --schedulable=true or oc adm manage-node NODE_NAME  --schedulable=false |
+| Force delete a pod | oc delete pod --grace-period=0 --force --namespace NAMESPACE_NAME POD_NAME |
+| Sync Users via LDAP dry run | oc adm groups sync --sync-config=ldap_group_sync.yml |
+| Sync Users via LDAP | oc adm groups sync --sync-config=ldap_group_sync.yml --confirm |
+| etcd cluster health | etcdctl -C https://etcd1:2379,https://etcd2:2379,https://etcd3:2379 --ca-file=/etc/origin/master/master.etcd-ca.crt --cert-file=/etc/origin/master/master.etcd-client.crt --key-file=/etc/origin/master/master.etcd-client.key cluster-health |
+| etcd member list | etcdctl -C https://etcd1:2379,https://etcd2:2379,https://etcd3:2379 --ca-file=/etc/origin/master/master.etcd-ca.crt --cert-file=/etc/origin/master/master.etcd-client.crt --key-file=/etc/origin/master/master.etcd-client.key member list |
+| Filter nodes by selector | oc get nodes --selector="logging-infra-fluentd=true" |
+| Open vSwitch dump flows | ovs-ofctl -O OpenFlow13 dump-flows br0 |
+| Get endpoints across the cluster | oc get endpoints --all-namespaces -o wide |
+| Get all Router IP addresses | oc get pods --all-namespaces --selector=router --template='{{range.items}}HostIP: {{.status.hostIP}} PodIP: {{.status.podIP}}{{"\n"}}{{end}}' |
+| Add cluster role to a user group | oc adm policy add-cluster-role-to-group cluster-admin USERGROUP_NAME |
+| Add cluster role to a user | oc adm policy add-cluster-role-to-user cluster-admin USER_NAME |
+| Get rolebinding | Project level rolebindings oc get rolebindings and Cluster level rolebindings oc get clusterrolebindings |
+| Role binding to Groups | oc adm policy add-role-to-group remove-role-from-group add-cluster-role-to-group remove-cluster-role-from-group|
+| Role binding to Users | oc adm policy add-role-to-user remove-role-from-user add-cluster-role-to-user remove-cluster-role-from-user|
+| Get Elasticsearch Indices | oc exec -n logging ES_PODNAME -- curl -s   --cacert /etc/elasticsearch/secret/admin-ca   --cert /etc/elasticsearch/secret/admin-cert   --key /etc/elasticsearch/secret/admin-key   https://localhost:9200/_cat/indices |
+| Remove Cluster admin role from a user | oc adm policy remove-role-from-user cluster-admin USER_NAME |
+| Remove Project level admin role from a user | oc adm policy remove-cluster-role-from-user admin USER_NAME |
+| Open vSwitch list bridges | ovs-vsctl list-br |
+| Open vSwitch Dump ports | ovs-ofctl -O OpenFlow13 dump-ports-desc br0 |
+| Get host and pod IP | oc get pods --selector=docker-registry --template='{{range .items}}HostIP: {{.status.hostIP}}   PodIP: {{.status.podIP}}{{end}}{{"\n"}}' |
+| Pruning old deployments | oc adm prune deployments --confirm or oc adm prune deployments --confirm |
+| Get Quotas for a namespace | oc get quota |
+| Get Limits for a namespace | oc get limits |
+| Delete user | oc delete USER_NAME - remove cluster role bindings for the user, remove namespaced role bindings for the user, remove the user from any sccs, remove the user from any groups, remove the user but leave identities for the user |
+| Delete Identity | oc delete identity USER_NAME |
+| Delete group | oc delete group GROUP_NAME - remove cluster role bindings for the group, remove namespaced role bindings for the group, remove the group from any sccs, remove the group|
+| Delete using selector | oc delete templates --selector="metrics-infra" or oc delete all --selector="metrics-infra" |
+| Get using selector | oc get all --selector="metrics-infra" |
+| Get cluster level events | oc get events -w |
+| Follow logs of a Container within a POD | oc logs -f POD_NAME -c CONTAINER_NAME |
+| Get all persistent volume claims - Reports Bind Status, Capacity, AccessModes and Volume info | oc get pvc --all-namespaces |
+| Get Persistent Volumes across the cluster - Reports PV Name, Capacity, Access Modes, Reclaim Policy, Status, Claim Name| oc get pv |
+| Edit objects| oc edit = oc get -o + oc apply (if we save) |
+| oc rsh | It uses Openshift Master API to create a secure tunnel to the remote pod and does not require ssh or the rsh unix commands. |
+| oc cp | requires the container image to provide tar as it copies entire directory by default and if tar isnt available the command fails. |
+| oc patch dc/dcname | Patching a DC results in automatic re-deployment of Pods. |
+| To use VSCode as the editor when you do edits with kubectl | export KUBE_EDITOR="code" |
+| Join Projects | oc adm pod-network join-projects --to=master-project sub-project |
+| Isolate Projects | oc adm pod-network isolate-projects project1 project2 |
+| Global projects - In the above example, all the pods and services in project1 and project2 can now access any pods and services in the cluster and vice versa. | oc adm pod-network make-projects-global project1 project2 |
+| Idling a service - all idling right now is manual. OCP will never automatically idle a service + Idle the service -- Request comes in -- Service gets activated -- Service remains activated until we Idle it again.| oc idle svc/myservice |
+| Granting roles to users and service accounts | OCP allows you to grant roles to users and serviceaccounts that do not exist yet. |
+| oc describe | oc describe can follow relationships ex: Describe on bc will display recent builds where are "oc get -o" wont be able to do this. |
+| SCC - Security Context Constrains | SCC control what actions a Pod can perform on which resources. |
+| Deployment config enable trigger | oc set triggers dc/dcname --from-config |
+| Deployment config disable trigger | oc set triggers dc/dcname --from-config remove |
+| Process a template and output objects in a text format | oc process -f TEMPLATE.yml |
+| Process a template and create resources | oc process -f FILENAME| oc create -f - |
+| Process a template and create resources with custom parameter values | oc process -f my-rails-postgresql -p POSTGRESQL_USER=bob -p POSTGRESQL_DATABASE=mydatabase | oc create -f - |
+| Process a template based on param values from a file | oc process -f my-rails-postgresql --param-file=postgres.env |
+| Manual build | oc start-build bc/BCNAME |
+| Manual deploy | oc rollout dc/DCNAME |
+| Exposing a service on a particular domain name | oc expose svc/SERVIC_NAME --hostname test.example.com.au |
+| Default behavior wrt to domain name/DNS during service exposure | {SERVICENAME}-{PROJECTNAME}.{ROUTINGSUBDOMAIN} |
+| Version and health check for API server via CURL | Healthz curl -k https://OCP-DOMAINNAME:8443/healthz and Version curl -k https://OCP-DOMAINNAME:8443/version |
+| Readiness and Liveness probes are applied to the DC. | This will help with various deployment options esp for Stateful workloads |
+| Get all objects with a particular label | oc get all -l app=nodejs-ex |
+| Build from a specific branch | oc new-app GITURL#BRANCHNAME |
+| Specify a builder image that needs to be used for building this app | oc new-app nodejs:8~GITURL |
+| Print the resource definitions that will be created | oc new-app -o json GITURL --name SAMPLEAPP > sampleapp_defn.json |
+| Set triggers from CLI | oc set triggers dc/frontend --from-image=myproject/origin-ruby-sample:latest -c helloworld |
+| To cancel the build which is running or pending in the queue. | oc cancel-build NAME - This terminates the build pod (if running) so no new image is pushed and no deployment is triggered. |
+| Create a new ImageStream with all the labels attached to the image from a insecure registry | oc import-image NEW_IS --confirm --insecure --from registry.example.com:5000/myimage --all |
+| Update an image stream and image stream tags based on values from an external registry | oc import-image - This results in image change events which could trigger the linked Builds and/or Deployments that refer to this image stream.|
+| Roll back a deployment | oc rollout undo dc/DCNAME - The DC template will be reverted to match the deployment revision specified in the undo command, and a new replication controller will be started.|
+| To re-enable the image change triggers | oc set triggers dc/DCNAME --auto - Image change triggers on the DC are disabled as part of the rollback to prevent accidentally starting a new deployment process immediately after the rollback is complete.|
+| Project level exports | oc export all -o json > project.json for JSON and oc export all -o yaml > project.yaml for YAML |
+| Export other project level objects | for object in rolebindings serviceaccounts secrets imagestreamtags podpreset cms egressnetworkpolicies rolebindingrestrictions limitranges resourcequotas pvcs templates cronjobs statefulsets hpas deployments replicasets poddisruptionbudget endpoints do; oc export $object -o yaml > $object.yaml done; |
+| Deployment config enable trigger | oc set triggers dc/dcname --from-config |
