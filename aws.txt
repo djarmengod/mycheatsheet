@@ -1,0 +1,10 @@
+| AWS S3 Transfer acceleration | aws s3 cp installer.jar.gz s3://bucketname/keyname --region ap-southeast-2 --endpoint-url http://s3-buckets-acceleration-endpoint-name |
+| List AZ's for a given region ex: For us-east-2 | aws ec2 describe-availability-zones --region us-east-2 |
+| List regions | aws ec2 describe-regions |
+| List buckets | aws s3api list-buckets |
+| List AMI id's from a region | Owners = 309956199498 is the account ID used to show Red Hat images aws ec2 describe-images --owners 309956199498 --query 'Images[*].[CreationDate,Name,ImageId]' --filters "Name=name,Values=RHEL-7.?*GA*" --region us-east-2 --output table PIPE sort -r |
+| Remove aws configured credentials | rm -f ~/.aws/credentials ~/.aws/config |
+| Uninstall aws cli | sudo rm -rf /usr/local/aws && sudo rm /usr/local/bin/aws |
+| List images with ENA support + owners filter | aws ec2 describe-images --owners 309956199498 PIPE jq '.Images[] PIPE select(.EnaSupport == true)' |
+| List image names with ENA support + owners filter | aws ec2 describe-images --owners 309956199498 PIPE jq '.Images[] PIPE select(.EnaSupport == true) PIPE .Name' |
+| Assume IAM Role | aws sts assume-role --role-arn arn:aws:iam::123456789012345:role/NonProdRoute53UpdateRole --role-session-name "DNSUpdate" | grep -E '(SecretAccessKey|SessionToken|AccessKeyId)' |
