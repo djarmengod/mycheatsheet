@@ -1,0 +1,9 @@
+Check if a python Module is installed:
+	~/Documents ⌚ 15:26:48
+	$ python -c "import base64"
+
+	~/Documents ⌚ 15:26:55
+	$ echo $?
+	0
+
+	~/Documents ⌚ 15:26:58
