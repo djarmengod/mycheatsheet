@@ -53,3 +53,7 @@ alias jopen='/usr/local/bin/op.sh jira'
 alias wsk='/Users/kiranya/Documents/Personal/wskcli/wsk'
 alias ms=/usr/local/bin/minishift
 alias tf='terraform'
+alias tfi='terraform init'
+alias tfp='terraform plan'
+alias tfa='terraform apply'
+alias tfd='terraform destroy'
