@@ -1,0 +1,13 @@
+ Scale a service within docker-compose  docker-compose -f /etc/docker-compose.yml scale chrome=10 
+ Install docker-compose  sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-uname -s-uname -m -o /usr/local/bin/ 
+ Force Recreate: If you want to force Compose to stop and recreate all containers, use the --force-recreate flag  docker-compose -f /etc/docker-compose.yml up -d --force-recreate 
+ Auto start compose services  crontab -e @reboot /usr/local/bin/docker-compose -f /etc/docker-compose.yml up -d Restart 
+ Docker GC using Sotify's image  docker run --privileged --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc:ro spotify/docker-gc 
+ Image layer details/history  docker history --no-trunc IMAGE_ID 
+ Send a specific Kill signal to a container  docker kill -s SIGKILL containerName 
+ Deleting all containers  docker rm $(docker ps -aq) 
+ Stop all containers  docker stop $(docker ps -q) 
+ Delete all images including intermediate ones  docker rmi -f $(docker images -q) 
+ To remove an image which has multiple tags - here all the tags and the image itself will be removed.  docker rmi --force  
+ Dockerfile declare instructions to be executed when building a child image.  Use ONBUILD instruction 
+ List all Privileged containers.  for name in docker ps  awk '{print $NF}'; do echo "$name --> $(docker inspect $name  grep -i Privileged)";  done 
