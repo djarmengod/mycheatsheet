@@ -1,0 +1,20 @@
+TMUX detach client: 
+	tmux detach-client -s test
+	tmux detach-client -s 2
+TMUX Verify:
+	tmux -v
+TMUX attach: 
+	tmux a -t 4
+Recording Tmux session:
+	setup your tmux session (tmux new -s session-name, create windows, splits, start processes in them)
+	detach (prefix+d)
+	run asciinema rec -c "tmux attach -t session-name"
+	when you're finished, just detach the session again
+Kill All tmux sessions:
+	tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill
+Shortcuts:
+	%  vertical split
+	"  horizontal split
+	o  swap panes
+	q  show pane numbers
+	x  kill pane

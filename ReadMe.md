@@ -300,3 +300,9 @@
 | Install postgresql server | `yum install postgresql-server` && `postgresql-setup initdb` && `systemctl enable postgresql.service` && `systemctl start postgresql.service` |
 | Create a populate tables for benchmark tests | `pgbench -i -s 50 dockertest` |
 | Run benchmark test with 10 clients and 2 workers | `pgbench -c 10 -j 2 -t 10000 dockertest` |
+
+
+
+TMUX detach client - tmux detach-client -s test, tmux detach-client -s 2
+TMUX Verify - tmux -v
+TMUX attach - tmux a -t 4

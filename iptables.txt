@@ -1,0 +1,5 @@
+Block all outgoing traffic on port 443:
+	iptables -A OUTPUT -p tcp --dport 443 -j DROP
+
+Remove a rule:
+	iptables -D OUTPUT -p tcp --dport 443 -j DROP
