@@ -1,0 +1,6 @@
+gcloud CLI:
+
+Login: gcloud auth login
+Set project: gcloud config set project PROJECT_ID
+SSH to compute ex for us-central1-a: gcloud compute ssh NODE_NAME --zone us-central1-a
+GKE get cluster details to configure kubectl - gcloud container clusters get-credentials CLUSTER_NAME --zone ZONE_NAME --project PROJECT_ID
