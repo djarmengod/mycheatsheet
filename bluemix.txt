@@ -1,0 +1,20 @@
+Login to Bluemix API endpoint ex: bx login -a api.ng.bluemix.net
+Install Plugins ex: container-service ex: bx plugin install container-service -r Bluemix
+Install Plugins ex: conatiner-registry ex: bx plugin install container-registry -r Bluemix
+List Plugins - bx plugin list
+Login to Conatiner registry - bx cr login
+Create a namespace in registry ex: bx cr namespace-add kiran01bm
+Create a cluster ex: bx cs cluster-create --name kiran01bm
+List Clusters - bx cs clusters
+List Worker nodes in a cluster ex: bx cs workers kiran01bm
+Configure kubectl ex: bx cs cluster-config kiran01bm
+	Ex:
+	~/Documents ⌚ 18:17:27
+	$ bx cs cluster-config kiran01bm
+	OK
+	The configuration for kiran01bm was downloaded successfully.
+
+	Export environment variables to start using Kubernetes.
+
+	export KUBECONFIG=/Users/kiran/.bluemix/plugins/container-service/clusters/kiran01bm/kube-config-hou02-kiran01bm.yml
+Connect to kubernetes dashboard - kubectl proxy
