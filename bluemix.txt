@@ -1,12 +1,21 @@
 Login to Bluemix API endpoint ex: bx login -a api.ng.bluemix.net
+
 Install Plugins ex: container-service ex: bx plugin install container-service -r Bluemix
+
 Install Plugins ex: conatiner-registry ex: bx plugin install container-registry -r Bluemix
+
 List Plugins - bx plugin list
+
 Login to Conatiner registry - bx cr login
+
 Create a namespace in registry ex: bx cr namespace-add kiran01bm
+
 Create a cluster ex: bx cs cluster-create --name kiran01bm
+
 List Clusters - bx cs clusters
+
 List Worker nodes in a cluster ex: bx cs workers kiran01bm
+
 Configure kubectl ex: bx cs cluster-config kiran01bm
 	Ex:
 	~/Documents ⌚ 18:17:27
@@ -17,4 +26,20 @@ Configure kubectl ex: bx cs cluster-config kiran01bm
 	Export environment variables to start using Kubernetes.
 
 	export KUBECONFIG=/Users/kiran/.bluemix/plugins/container-service/clusters/kiran01bm/kube-config-hou02-kiran01bm.yml
+
 Connect to kubernetes dashboard - kubectl proxy
+
+List images from remote registry - bx cr images
+	Ex:
+	$ bx cr images
+	Listing images...
+
+	REPOSITORY                                   TAG      DIGEST         NAMESPACE   CREATED          SIZE     SECURITY STATUS
+	registry.ng.bluemix.net/kiran01bm/customer   latest   00ff0c7061b9   kiran01bm   11 minutes ago   288 MB   9 Issues
+
+Upgrade Control plane ex: bx cs cluster-update CLUSTER_NAME
+Upgrade workers ex: bx cs worker-update CLUSTER_NAME NODE_NAME1 NODE_NAME2
+
+Delete a cluster ex: bx cs cluster-rm CLUSTER_NAME
+
+Add worker node ex: bx cs worker-add --cluster CLUSTER_NAME
