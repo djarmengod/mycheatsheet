@@ -1,6 +1,32 @@
 gcloud CLI:
 
-Login: gcloud auth login
-Set project: gcloud config set project PROJECT_ID
-SSH to compute ex for us-central1-a: gcloud compute ssh NODE_NAME --zone us-central1-a
-GKE get cluster details to configure kubectl - gcloud container clusters get-credentials CLUSTER_NAME --zone ZONE_NAME --project PROJECT_ID
+	Login: 
+		gcloud auth login
+
+	Set project: 
+		gcloud config set project PROJECT_ID
+
+	SSH to compute ex for us-central1-a: 
+		gcloud compute ssh NODE_NAME --zone us-central1-a
+
+	GKE get cluster details to configure kubectl:
+		gcloud container clusters get-credentials CLUSTER_NAME --zone ZONE_NAME --project PROJECT_ID
+
+
+Generic:
+	gcloud compute zones list
+
+
+	gcloud compute machine-types list
+	gcloud compute machine-types describe f1-micro --zone us-west1-b
+
+
+	gcloud compute networks list
+	gcloud compute networks describe default
+
+	gcloud compute images list
+	gcloud compute images list | grep windows-server
+	gcloud compute images list --uri | grep debian
+
+
+	gcloud deployment-manager deployments create demoServer --config demoServer.yaml
