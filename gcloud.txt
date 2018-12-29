@@ -14,19 +14,46 @@ gcloud CLI:
 
 
 Generic:
-	gcloud compute zones list
+	Google Compute:
+		gcloud compute zones list
 
 
-	gcloud compute machine-types list
-	gcloud compute machine-types describe f1-micro --zone us-west1-b
+		gcloud compute machine-types list
+		gcloud compute machine-types describe f1-micro --zone us-west1-b
 
 
-	gcloud compute networks list
-	gcloud compute networks describe default
+		gcloud compute networks list
+		gcloud compute networks describe default
 
-	gcloud compute images list
-	gcloud compute images list | grep windows-server
-	gcloud compute images list --uri | grep debian
+		gcloud compute images list
+		gcloud compute images list | grep windows-server
+		gcloud compute images list --uri | grep debian
 
 
-	gcloud deployment-manager deployments create demoServer --config demoServer.yaml
+	Deployment Manager
+		gcloud deployment-manager deployments create demoServer --config demoServer.yaml
+
+		gcloud deployment-manager deployments create demoLBService --config demolb.yaml
+
+	GCS:
+		gsutil ls -L gs://$BUCKET_NAME/$OBJECT_NAME
+
+
+	Network Services:
+		Get forwarding rules
+			gcloud compute forwarding-rules list 
+
+
+research.google.com
+	https://ai.google/research
+
+
+Google Peering Details: https://peering.google.com/#/infrastructure	
+	* Data centers
+	* Edge Points of Presence 
+	* Edge nodes (Google Global Cache, or GGC)
+
+GCP - Standards, Regulations and Compliance
+	https://cloud.google.com/security/compliance/#/
+
+Recommendation Engine on GCE is similar to Trusted Advisor for EC2 ex: Recommendations on Cost Optimization
