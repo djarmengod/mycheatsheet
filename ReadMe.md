@@ -1,3 +1,9 @@
+[Principles of Chaos Engineering](http://principlesofchaos.org/) 
+[SRE ToC](https://landing.google.com/sre/sre-book/toc/index.html)
+[SRE books](https://landing.google.com/sre/books/)
+
+
+
 | Description |  Detail |
 | --- | --- |
 | Check firmware type i.e is it BIOS or UEFI | `dmesg \| more` and `dmidecode \| more` |
