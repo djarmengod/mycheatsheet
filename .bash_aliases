@@ -53,7 +53,18 @@ alias jopen='/usr/local/bin/op.sh jira'
 alias wsk='/Users/kiranya/Documents/Personal/wskcli/wsk'
 alias ms=/usr/local/bin/minishift
 alias tf='terraform'
-alias tfi='terraform init'
-alias tfp='terraform plan'
-alias tfa='terraform apply'
-alias tfd='terraform destroy'
+alias ti='terraform init'
+alias tp='terraform plan'
+alias ta='terraform apply'
+alias td='terraform destroy'
+
+alias kps='kubectl get pods -o wide'
+alias kns='kubectl get nodes -o wide'
+alias kss='kubectl get svc -o wide'
+alias kds='kubectl get deployments -o wide'
+
+# ex: dc up
+alias dc='docker-compose'
+
+# ex: dm ip kafka, dm ls, dm create --driver virtualbox kafka
+alias dm='docker-machine'
