@@ -1,7 +1,7 @@
-[Principles of Chaos Engineering](http://principlesofchaos.org/) 
-[SRE ToC](https://landing.google.com/sre/sre-book/toc/index.html)
-[SRE books](https://landing.google.com/sre/books/)
-
+1. [Principles of Chaos Engineering](http://principlesofchaos.org/) 
+2. [SRE ToC](https://landing.google.com/sre/sre-book/toc/index.html)
+3. [SRE books](https://landing.google.com/sre/books/)
+4. [research.google.com](https://ai.google/research)
 
 
 | Description |  Detail |
