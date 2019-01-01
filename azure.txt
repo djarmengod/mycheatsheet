@@ -1,3 +1,34 @@
+# Login
+az login
+
+# Logout
+az logout
+
+# List accounts
+az account list
+
+# Set session to a subscription
+az account set --subscription="SUBSCRIPTION_ID"
+
+# Login as a Service Principal
+az login --service-principal -u CLIENT_ID -p CLIENT_SECRET --tenant TENANT_ID
+
+# List locations
+az account list-locations
+
+# List VM Sizes
+az vm list-sizes --location eastus
+
+# Configure Service Principal for Terraform Azure provider
+	$ export ARM_CLIENT_ID="00000000-0000-0000-0000-000000000000"
+	$ export ARM_CLIENT_SECRET="00000000-0000-0000-0000-000000000000"
+	$ export ARM_SUBSCRIPTION_ID="00000000-0000-0000-0000-000000000000"
+	$ export ARM_TENANT_ID="00000000-0000-0000-0000-000000000000"
+
+
+# Create the Service Principal which will have permissions to manage resources in the specified Subscription 
+az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/SUBSCRIPTION_ID"
+
 # Download credentials and configure the kubectl to use them
 az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
 
