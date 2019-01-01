@@ -1,13 +1,55 @@
- Scale a service within docker-compose  docker-compose -f /etc/docker-compose.yml scale chrome=10 
- Install docker-compose  sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-uname -s-uname -m -o /usr/local/bin/ 
- Force Recreate: If you want to force Compose to stop and recreate all containers, use the --force-recreate flag  docker-compose -f /etc/docker-compose.yml up -d --force-recreate 
- Auto start compose services  crontab -e @reboot /usr/local/bin/docker-compose -f /etc/docker-compose.yml up -d Restart 
- Docker GC using Sotify's image  docker run --privileged --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc:ro spotify/docker-gc 
- Image layer details/history  docker history --no-trunc IMAGE_ID 
- Send a specific Kill signal to a container  docker kill -s SIGKILL containerName 
- Deleting all containers  docker rm $(docker ps -aq) 
- Stop all containers  docker stop $(docker ps -q) 
- Delete all images including intermediate ones  docker rmi -f $(docker images -q) 
- To remove an image which has multiple tags - here all the tags and the image itself will be removed.  docker rmi --force  
- Dockerfile declare instructions to be executed when building a child image.  Use ONBUILD instruction 
- List all Privileged containers.  for name in docker ps  awk '{print $NF}'; do echo "$name --> $(docker inspect $name  grep -i Privileged)";  done 
+Ethernet bridge administration: brctl
+
+Container network namespace: ls -lart /var/run/docker/netns
+
+Check if a network interface is veth: ip -d link show | grep veth
+
+Get container pid: 
+	docker inspect --format '{{.State.Pid}}' kafka-docker_zookeeper_1 
+	docker inspect kafka-docker_zookeeper_1 | grep -iw pid
+
+List namespaces for a process and get link info:
+	[root@ip-172-31-44-31 netns]# ls -l /proc/21508/ns
+		total 0
+		lrwxrwxrwx 1 root root 0 Dec 25 04:26 cgroup -> cgroup:[4026531835]
+		lrwxrwxrwx 1 root root 0 Dec 25 04:26 ipc -> ipc:[4026532230]
+		lrwxrwxrwx 1 root root 0 Dec 25 04:26 mnt -> mnt:[4026532228]
+		lrwxrwxrwx 1 root root 0 Dec 25 04:10 net -> net:[4026532233]
+		lrwxrwxrwx 1 root root 0 Dec 25 04:26 pid -> pid:[4026532231]
+		lrwxrwxrwx 1 root root 0 Dec 25 04:26 pid_for_children -> pid:[4026532231]
+		lrwxrwxrwx 1 root root 0 Dec 25 04:26 user -> user:[4026531837]
+		lrwxrwxrwx 1 root root 0 Dec 25 04:26 uts -> uts:[4026532229]
+	[root@ip-172-31-44-31 netns]#
+        # Required because docker deletes all containers network namespaces information from /var/run/netns
+	[root@ip-172-31-44-31 netns]# ln -s /proc/21508/ns/net /var/run/netns/21508
+	[root@ip-172-31-44-31 netns]# ip netns list
+		21508 (id: 0)
+	[root@ip-172-31-44-31 netns]# sudo ip netns exec  21508 ip link
+		1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+		    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+		76: eth0@if77: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DEFAULT group default
+		    link/ether 02:42:0a:05:00:04 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+	[root@ip-172-31-44-31 netns]#
+
+Access from container bridge network to external network through NAT
+	sudo iptables --list -t nat
+
+Scale a service within docker-compose  docker-compose -f /etc/docker-compose.yml scale chrome=10 
+Install docker-compose  sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-uname -s-uname -m -o /usr/local/bin/ 
+Force Recreate: If you want to force Compose to stop and recreate all containers, use the --force-recreate flag  docker-compose -f /etc/docker-compose.yml up -d --force-recreate 
+Auto start compose services  crontab -e @reboot /usr/local/bin/docker-compose -f /etc/docker-compose.yml up -d Restart 
+Docker GC using Sotify's image  docker run --privileged --rm -v /var/run/docker.sock:/var/run/docker.sock -v /etc:/etc:ro spotify/docker-gc 
+Image layer details/history  docker history --no-trunc IMAGE_ID 
+Send a specific Kill signal to a container  docker kill -s SIGKILL containerName 
+Deleting all containers  docker rm $(docker ps -aq) 
+Stop all containers  docker stop $(docker ps -q) 
+Delete all images including intermediate ones  docker rmi -f $(docker images -q) 
+To remove an image which has multiple tags - here all the tags and the image itself will be removed.  docker rmi --force  
+Dockerfile declare instructions to be executed when building a child image.  Use ONBUILD instruction 
+List all Privileged containers.  for name in docker ps  awk '{print $NF}'; do echo "$name --> $(docker inspect $name  grep -i Privileged)";  done 
+To get Docker client to talk to the Docker engine on Docker Machine named kafka - eval $(docker-machine env kafka)
+Docker machine restart - docker-machine restart default
+Remove all networks not used by at least one container - docker newtork prune
+
+Docker compose stop one service ex: docker-compose stop jenkinsservice
+Stopping all services ex: docker-compose down

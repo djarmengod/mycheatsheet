@@ -1,0 +1,2 @@
+Drain node - kubectl drain NODE_NAME --ignore-daemonsets
+Uncordon a node - kubectl uncordon
