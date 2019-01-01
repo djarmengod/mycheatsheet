@@ -1,0 +1,5 @@
+# Command to download credentials and configure the Kubernetes CLI to use them
+az aks get-credentials --resource-group myResourceGroup --name myAKSCluster
+
+# Delete the cluster
+az aks delete --resource-group myResourceGroup --name myAKSCluster --no-wait
