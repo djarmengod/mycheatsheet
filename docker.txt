@@ -53,3 +53,9 @@ Remove all networks not used by at least one container - docker newtork prune
 
 Docker compose stop one service ex: docker-compose stop jenkinsservice
 Stopping all services ex: docker-compose down
+
+Redis:
+	Run a local redis container: docker run --name some-redis -d redis
+	Run a redis container and connect to a remote instance: docker run -it --link some-redis:redis --rm redis redis-cli -h INSERT_PUBLIC_IP -p 6379 -a INSERT_PASSWORD
+	Connect to redis and set password: 1) docker exec -it redis sh 2) redis-cli 3) config set requirepass INSERT_PASSWORD
+	
