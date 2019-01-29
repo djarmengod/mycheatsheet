@@ -1,0 +1,24 @@
+| Description |  Command |
+| --- | --- |
+| Add CA to certificate the npm trust store | `npm config set cafile C:\Users\Administrator\Downloads\CA_CHAIN.pem` |
+| Verify if the key-pairs match |  `diff  <(openssl x509 -in ssl.crt -pubkey -noout) <(openssl rsa -in ssl.key -pubout)` |
+| Create CSR from existing key-pair | `openssl req -sha256 -new -key domainName.key -out domainName.csr` |
+| Create a self-signed certificate from existing keys | `openssl x509 -req -sha256 -days 365 -in domainName.csr -signkey domainName.key -out domainName.crt` |
+| Create new key pairs and CSR | `openssl req -out domainName.csr -new -newkey rsa:4096 -nodes -keyout domainName.key` |
+| Create new key pair and self-signed certificate, private key password protected | `openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 356` |
+| Create new key pair and self-signed certificate, private key not password protected | `openssl req -nodes -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 356` |
+| SSL Handshake debug | `openssl s_client -showcerts -connect google.com:443 -debug -nbio -state -tls1 and grep -i state` |
+| Get Certificates | `openssl s_client -showcerts -connect DOMAIN_NAME:443 </dev/null 2>/dev/null and openssl x509 -outform PEM >mycertfile.pem` |
+| Print Certificate | `openssl x509 -in temp.pem -text -noout` |
+| Create key-pair | `openssl genrsa -des3 -out private-for-san.pem 2048` |
+| Export public key | `openssl rsa -in private-for-san.pem -outform PEM -pubout -out public-for-san.pem` |
+| Export private key unencrypted | `openssl rsa -in private-for-san.pem -out private_unencrypted.pem -outform PEM` |
+| Print CSR | `openssl req -noout -text -in domainName.csr` |
+| Print certs in a cert container | `openssl pkcs7 -print_certs -in certContainer.p7b` |
+| Enable SNI with s_client | `openssl s_client -connect google.com:443 -servername google.com` |
+| Import P7b into JKS | `keytool -importcert -alias ALIAS -trustcacerts -file FullChainOfCerts.p7b -keystore newkeystore.jks –storetype JKS` |
+| Import cert and trust | `keytool -import -trustcacerts -keystore cacerts -alias ALIAS -file cert.pem` |
+| Match keys | Assuming you have the public keys inside x.509 certificates, and assuming they are RSA keys, then for each public key, do, `openssl x509 -in certfile -modulus -noout`. For each private key, do `openssl rsa -in keyfile -modulus -noout`. Then match the keys by modulus. |
+| Generate random password | For base64 based `openssl rand -base64 10` and for hexa-decimal based `openssl rand -hex 10` |
+| NPM ignore ssl warnings/errors | `npm config set strict-ssl false` |
+| Verify if the Private key matches a Cert/CSR | This can be done by a modulus check `openssl x509 -noout -modulus -in CERTIFICATE.crt | openssl md5` and `openssl req -noout -modulus -in CSR.csr | openssl md5` and `openssl rsa -noout -modulus -in PRIVATEKEY.key | openssl md5`

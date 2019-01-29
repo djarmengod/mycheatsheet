@@ -76,7 +76,7 @@
 | Match keys | Assuming you have the public keys inside x.509 certificates, and assuming they are RSA keys, then for each public key, do, `openssl x509 -in certfile -modulus -noout`. For each private key, do `openssl rsa -in keyfile -modulus -noout`. Then match the keys by modulus. |
 | Generate random password | For base64 based `openssl rand -base64 10` and for hexa-decimal based `openssl rand -hex 10` |
 | NPM ignore ssl warnings/errors | `npm config set strict-ssl false` |
-
+| Verify if the Private key matches a Cert/CSR | This can be done by a modulus check `openssl x509 -noout -modulus -in CERTIFICATE.crt | openssl md5` and `openssl req -noout -modulus -in CSR.csr | openssl md5` and `openssl rsa -noout -modulus -in PRIVATEKEY.key | openssl md5`
 
 | Description |  Detail |
 | --- | --- |
