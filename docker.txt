@@ -54,6 +54,8 @@ Remove all networks not used by at least one container - docker newtork prune
 Docker compose stop one service ex: docker-compose stop jenkinsservice
 Stopping all services ex: docker-compose down
 
+Remove dangling images - docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+
 Redis:
 	Run a local redis container: docker run --name some-redis -d redis
 	Run a redis container and connect to a remote instance: docker run -it --link some-redis:redis --rm redis redis-cli -h INSERT_PUBLIC_IP -p 6379 -a INSERT_PASSWORD
