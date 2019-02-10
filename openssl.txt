@@ -22,3 +22,5 @@
 | Generate random password | For base64 based `openssl rand -base64 10` and for hexa-decimal based `openssl rand -hex 10` |
 | NPM ignore ssl warnings/errors | `npm config set strict-ssl false` |
 | Verify if the Private key matches a Cert/CSR | This can be done by a modulus check `openssl x509 -noout -modulus -in CERTIFICATE.crt | openssl md5` and `openssl req -noout -modulus -in CSR.csr | openssl md5` and `openssl rsa -noout -modulus -in PRIVATEKEY.key | openssl md5`
+| Connect to an endpoint with resolve ex: bypass load balancers | `curl -v https://sso-domain-name/auth/realms/3scale-sso/ --cacert /etc/pki/tls/zync/zync.pem --resolve sso-domain-name:443:IPADDR`
+| SSL handshake using ruby | `SSL_CERT_FILE=/etc/pki/tls/zync/zync.pem ruby -r net/http -e 'puts Net::HTTP.get_response(URI("https://DOMAINNAME")).code'`|
