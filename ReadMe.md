@@ -51,6 +51,8 @@
 | RHEL Atomic Vulnerability Scan | `atomic scan` |
 | sos report to a custom path | `mkdir /root/sos && sosreport --tmp-dir /root/sos` |
 | List contents of an xz file | `tar -tvJf /var/tmp/sosreport-KiranM.1234-20180905005434.tar.xz` -J deals with the xz files and -j is to filter the archive through bzip2 |
+| Wipe a disk by writing random data | `dd if=/dev/urandom of=/dev/sda bs=16M` |
+| Zeroing out a disk | `dd if=/dev/zero of=/dev/sda bs=16M` |
 
 
 | Description |  Command |
