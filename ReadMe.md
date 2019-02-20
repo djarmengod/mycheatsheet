@@ -88,7 +88,7 @@
 | Packet capture from within Network namespace  |  `nsenter -t PID -n tcpdump -i any -s0 -nn -A -w /tmp/appName.pcap and port 443`, `nsenter -t PID -p tcpdump -i any -s0 -A -nn host IP_ADDRESS`, `nsenter -t PID -n tcpdump -i any -s0 -nn -A host IP_ADDRESS -w /tmp/appName.pcap and port 443`, `nsenter -t PID -n tcpdump -i any -s0 -nn -A host IP_ADDRESS -w /tmp/appName.pcap and port 8080`, `nsenter -t PID -n tcpdump -i any -nn -R http -2`, `nsenter -t PID -n tcpdump -i any -nn -R dns -2`, `nsenter -t PID -n tcpdump -i any -nn -R ssl -2`, `nsenter -t PID -n tshark -i any -nn -R 'http.request.method == "GET" || http.request.method == "HEAD" || http.request.method == "POST" || http'`, `nsenter -t PID -n tshark -i any -nn -R 'tcp.analysis.retransmission or tcp.analysis.fast_retransmission'`,`nsenter -t PID -n tshark -i any -nn host -A -s0 127.0.0.1 and port 8081` |
 | Find out which network interface to internet. Same can be used to find a route to a particular host. | `route get 8.8.8.8` |
 | Display the authoritative (primary) name server | Use the -type=soa option  ex: `nslookup -type=soa google.com` |
-
+| Curl with resolve | `curl -v https://example.com/auth/realms/3scale-sso/ --cacert /etc/pki/tls/zync/zync.pem --resolve example.com:443:10.1.1.20` |
 
 | Description |  Detail |
 | --- | --- |

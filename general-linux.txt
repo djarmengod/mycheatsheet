@@ -1,0 +1,3 @@
+Resize LVM (by extents):
+	lvextend -l +380 /dev/vg1/nexuslv
+	resize2fs /dev/vg1/nexuslv
