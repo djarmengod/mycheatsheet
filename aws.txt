@@ -8,3 +8,23 @@
 | List images with ENA support + owners filter | aws ec2 describe-images --owners 309956199498 PIPE jq '.Images[] PIPE select(.EnaSupport == true)' |
 | List image names with ENA support + owners filter | aws ec2 describe-images --owners 309956199498 PIPE jq '.Images[] PIPE select(.EnaSupport == true) PIPE .Name' |
 | Assume IAM Role | aws sts assume-role --role-arn arn:aws:iam::123456789012345:role/NonProdRoute53UpdateRole --role-session-name "DNSUpdate" | grep -E '(SecretAccessKey|SessionToken|AccessKeyId)' |
+
+
+aws cli:
+	~/.aws/credentials
+		[blue]
+		aws_access_key_id = XXXX
+		aws_secret_access_key = XXXXXXXXXXXX
+
+	~/.aws/config
+		[blue]
+		region = us-east-2
+
+	export AWS_PROFILE="blue"
+
+	Ensure that AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables are not set.
+
+	Test:
+		aws ec2 describe-availability-zones --region us-east-2
+
+	
