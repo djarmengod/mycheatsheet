@@ -182,7 +182,7 @@
 | Get endpoints across the cluster | `oc get endpoints --all-namespaces -o wide` |
 | Get all Router IP addresses | `oc get pods --all-namespaces --selector=router --template='{{range.items}}HostIP: {{.status.hostIP}} PodIP: {{.status.podIP}}{{"\n"}}{{end}}'` |
 | Add cluster role to a user group | `oc adm policy add-cluster-role-to-group cluster-admin USERGROUP_NAME` |
-| Add cluster role to a user | `oc adm policy add-cluster-role-to-user cluster-admin USER_NAME` |
+| Add cluster role to a user | `oc adm policy add-cluster-role-to-user cluster-admin USER_NAME` and `oc adm policy add-role-to-user cluster-admin kiran` |
 | Get rolebinding | Project level rolebindings `oc get rolebindings` and Cluster level rolebindings `oc get clusterrolebindings` |
 | Role binding to Groups | oc adm policy `add-role-to-group` `remove-role-from-group` `add-cluster-role-to-group` `remove-cluster-role-from-group`|
 | Role binding to Users | oc adm policy `add-role-to-user` `remove-role-from-user` `add-cluster-role-to-user` `remove-cluster-role-from-user`|

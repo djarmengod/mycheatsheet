@@ -27,4 +27,4 @@ aws cli:
 	Test:
 		aws ec2 describe-availability-zones --region us-east-2
 
-	
+Validate Cloudformation Template - aws cloudformation validate-template --template-body file://ec2CF.json
