@@ -3,6 +3,9 @@
 ## GPL, AGPL and SaaS:
 The GPL licenses are the most common open source licenses and generally the most problematic for companies developing software. SaaS companies are more free to use GPL licensed-code because the obligations of the GPL are triggered upon software distribution and SaaS software by nature is not distributed. In essence, the obligation to make source code available is triggered not just by distribution but also by allowing use over a network. These licenses are much less common than the GPL, but are still out there and are designed to plug what has been considered a **loophole** in the GPL.
 
+*Triggering factor*
+The difference between the GPL and the AGPL in relation to SaaS is that the triggering factor in the AGPL is not just by distribution, modification but also by allowing use over a network, while in the GPL the triggering factor for license enforcement is distribution.
+
 ## No License:
 The other “license type” that SaaS companies should watch out for is no license. In the vast majority of audits we perform we find code that has been appropriated from the Internet, but with no clear license. The default of *copyright* law is that if it’s not your software and you don’t have permission (i.e. a license) you don’t have the right to use it.
 
@@ -24,14 +27,14 @@ Ex:Say that you are building a SaaS Hotel Booking Engine and you want to include
 Apache Kafka is licensed under Apache 2.0. The license change only applies to our Confluent software that was previously called “Confluent Open Source”: Confluent Schema Registry, Confluent REST Proxy, Confluent KSQL and some Confluent Connectors.
 
 *Why not AGPL ?*
-AGPL doesn’t solve the problem we are trying to fix. AGPL allows cloud service providers to sell services using the exact software being licensed, and charge for it, without any limitation. This means the software developer has become the unpaid developer and maintainer for the cloud service provider—which is not a scenario we want to enable.
+AGPL doesn’t solve the problem we are trying to fix. *AGPL allows cloud service providers to sell services using the exact software being licensed, and charge for it, without any limitation.* This means the software developer has become the unpaid developer and maintainer for the cloud service provider—which is not a scenario we want to enable.
 
 Also, AGPL is too aggressive for our customers who need to redistribute commercial products.  If you put AGPL code in a distributed program, you have to open source the whole program. We want you to be able to embed our code in proprietary applications, change it and not worry about open sourcing any of your changes.
 
 *Why not Commons Clause ?*
 Commons Clause is an approach that adds an *anti-SaaS provision to existing open source licenses*, which can make interpreting the license confusing.
 
-So the new license comes with a **Excluded Purpose** which specifically handles the public cloud dynamic
+So the new license comes with a *Excluded Purpose* which specifically handles the public cloud dynamic
 ```
 “Excluded Purpose” is making available any software-as a-service, platform-as-a-service, infrastructure-as-a-service or other similar online service that competes with Confluent products or services that provide the Software.
 ```
@@ -46,7 +49,7 @@ Redis' creator, added the change just "means that basically certain enterprise a
 Neo4j added the Commons Clause to the AGPL license that had previously covered the software.
 
 ## Commons Clause
-The Commons Clause, according to its authors, is a license addendum that allows "all permissions of the original license to remain except the ability to 'sell' the software." That exception, however, means that the clause effectively becomes the software license, reducing the underlying license to guideline status and changing the nature of the project from "open source" to "source available" (a term used by the clause's authors). 
+The Commons Clause, according to its authors, is a license addendum that allows *all permissions of the original license to remain except the ability to 'sell' the software.* That exception, however, means that the clause effectively becomes the software license, reducing the underlying license to guideline status and changing the nature of the project from "open source" to "source available" (a term used by the clause's authors). 
 
 ## EULA
 EULA only gives you the right to use and no other rights like rights to Download Source, Modification, Distribution etc.
