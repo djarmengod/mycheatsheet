@@ -28,4 +28,4 @@
 Validate Hanshake - SSL_CERT_FILE=/etc/pki/tls/app/test.pem ruby -r net/http -e 'puts Net::HTTP.get_response(URI("https://example.com")).code'
 
 Show Certs - openssl s_client -showcerts -connect example.com:443 --servername example.com
-
+Verify a PrivateKey - openssl rsa -check -in kiran01bm-rh-gps-aws.pem -noout
