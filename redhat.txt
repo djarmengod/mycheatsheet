@@ -24,4 +24,23 @@ Unregister:
 #3 subscription-manager clean
 
 ------------------------------------------------------------------------------------------------------------
+# Proxy Configuration
+------------------------------------------------------------------------------------------------------------
+#1 To configure the proxy for subscription-manager:
 
+subscription-manager config --server.proxy_hostname=proxy.example.com --server.proxy_port=8080 --server.proxy_user=admin --server.proxy_password=secret
+
+
+#2 To configure the proxy for yum, Set the below in /etc/yum.conf
+
+proxy=https://<Proxy-Server-IP-Address>:<Proxy_Port>
+proxy_username=<Proxy-User-Name>
+proxy_password=<Proxy-Password> 
+
+
+#3 To configure http and https proxy at host level set the following environment variables either via “/root/.bashrc” or via /etc/environment (you need to source these env variables)
+
+export http_proxy=http://{Proxy-User-Name}:{Proxy-Password}@<Proxy-Server-IP-Address>:<Proxy-Port>
+export https_proxy= http://{Proxy-User-Name}:{Proxy-Password}@<Proxy-Server-IP-Address>:<Proxy-Port>
+export ftp_proxy= http://{Proxy-User-Name}:{Proxy-Password}@<Proxy-Server-IP-Address>:<Proxy-Port>
+export no_proxy=127.0.0.1,localhost
