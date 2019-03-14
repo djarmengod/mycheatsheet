@@ -1,0 +1,27 @@
+------------------------------------------------------------------------------------------------------------
+# Subscription Manager Register and Unregister
+------------------------------------------------------------------------------------------------------------
+
+Ref: 
+https://access.redhat.com/solutions/253273
+
+Register:
+subscription-manager register
+
+Attach a specific subscription through the Customer Portal
+#1 Attach subs via Customer Portal
+#2 subscription-manager refresh
+
+Attach a specific sub
+subscription-manager attach --pool=<POOL_ID>
+
+List all available subs
+subscription-manager list --available --all
+
+Unregister:
+#1 subscription-manager remove --all
+#2 subscription-manager unregister
+#3 subscription-manager clean
+
+------------------------------------------------------------------------------------------------------------
+
