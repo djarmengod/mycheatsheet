@@ -4,7 +4,13 @@
 The GPL licenses are the most common open source licenses and generally the most problematic for companies developing software. SaaS companies are more free to use GPL licensed-code because the obligations of the GPL are triggered upon software distribution and SaaS software by nature is not distributed. In essence, the obligation to make source code available is triggered not just by distribution but also by allowing use over a network. These licenses are much less common than the GPL, but are still out there and are designed to plug what has been considered a **loophole** in the GPL.
 
 *Triggering factor*
-The difference between the GPL and the AGPL in relation to SaaS is that the triggering factor in the AGPL is not just by distribution, modification but also by allowing use over a network, while in the GPL the triggering factor for license enforcement is distribution.
+The difference between the GPL and the AGPL in relation to SaaS is that the triggering factor in the AGPL is not just by distribution but also by allowing use over a network, while in the GPL the triggering factor for license enforcement is distribution.
+
+*Famous example*
+In short, the ASP loophole means that only those parties actually distributing their modified code would trigger the GPL. Google famously benefits from this; it is free to liberally modify the source to the Linux kernel, while being legally required to contribute nothing back, because it does not distribute Linux in the traditional sense. Those enterprises that did not ship technology products, in other words, had nothing to fear from the GPL. Not so with the AGPL. The Affero General Public License was created to provide a version of the GPL with this loophole closed. Any modifications that are deployed in a network context need to be made available under the terms of the original license.
+
+## JS Frameworks
+Front end like Angular and  React and backend like Node are all based on MIT license
 
 ## No License:
 The other “license type” that SaaS companies should watch out for is no license. In the vast majority of audits we perform we find code that has been appropriated from the Internet, but with no clear license. The default of *copyright* law is that if it’s not your software and you don’t have permission (i.e. a license) you don’t have the right to use it.
