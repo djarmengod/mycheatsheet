@@ -23,9 +23,10 @@
 19. All certificates are deployed and rotated automatically throughout the life of the domain, without any additional operational overhead.
 20. You can have Internet or VPC access. 
 21. VPC access - IP addresses from your VPC are attached to your Amazon Elasticsearch Service domain and all network traffic stays within the AWS network and is not accessible to the Internet. Moreover, you can use security groups and IAM policies to restrict access to your Amazon Elasticsearch Service domains.
-22. Internet endpoints are publicly accessible. If you select public access, you should secure your domain with an access policy that only allows specific users or IP addresses to access the domain.
-23. Amazon Elasticsearch Service automates common administrative tasks, such as performing backups, monitoring instances and patching software.
-
+22. You can also use IAM-based policies to provide fine-grained access control to which IAM roles can perform administrative tasks, use the Elasticsearch APIS and have access to the resources in the domain down to the index-level.
+23. Internet endpoints are publicly accessible. If you select public access, you should secure your domain with an access policy that only allows specific users or IP addresses to access the domain.
+24. Amazon Elasticsearch Service automates common administrative tasks, such as performing backups, monitoring instances and patching software.
+25. Scaling your Amazon Elasticsearch Service domain by adding or modifying instances, and storage volumes is an online operation that does not require any downtime.
 
 ## From Elastic
 
