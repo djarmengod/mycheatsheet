@@ -1,0 +1,8 @@
+Run a sample redis container without customisation
+docker run --name some-redis -d redis
+
+Password less connect
+docker run -it --link some-redis:redis --rm redis redis-cli -h 54.158.135.255 -p 6379
+
+Connect with Password
+docker run -it --link some-redis:redis --rm redis redis-cli -h 18.206.96.27 -p 6379 -a 37af9dbf4edc0c79ef90
