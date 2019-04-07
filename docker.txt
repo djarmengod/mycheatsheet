@@ -54,10 +54,32 @@ Remove all networks not used by at least one container - docker newtork prune
 Docker compose stop one service ex: docker-compose stop jenkinsservice
 Stopping all services ex: docker-compose down
 
-Remove dangling images - docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
+Remove dangling images 
+	docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
 
+Check recent logs:
+	docker logs -f nexus --tail 500
 Redis:
 	Run a local redis container: docker run --name some-redis -d redis
 	Run a redis container and connect to a remote instance: docker run -it --link some-redis:redis --rm redis redis-cli -h INSERT_PUBLIC_IP -p 6379 -a INSERT_PASSWORD
 	Connect to redis and set password: 1) docker exec -it redis sh 2) redis-cli 3) config set requirepass INSERT_PASSWORD
 	
+
+Sample push to quay.io
+	~/Documents/GIT/kafka-related on  master ⌚ 15:37:59
+	$ docker tag ea00880d6e20 quay.io/kiran01bm/kafka-node-producer:latest
+
+	~/Documents/GIT/kafka-related on  master ⌚ 15:38:23
+	$ docker push quay.io/kiran01bm/kafka-node-producer:latest
+	The push refers to repository [quay.io/kiran01bm/kafka-node-producer]
+	140091ad36eb: Pushed
+	7e2d22bb88c2: Pushed
+	2d7a89753503: Pushed
+	c4b0ce903029: Mounted from kiran01bm/kafka-node-consumer
+	ed3e2b196162: Mounted from kiran01bm/kafka-node-consumer
+	79f5f594bdeb: Mounted from kiran01bm/kafka-node-consumer
+	8884a4e32324: Mounted from kiran01bm/kafka-node-consumer
+	887d218b44a0: Mounted from kiran01bm/kafka-node-consumer
+	73046094a9b8: Mounted from kiran01bm/kafka-node-consumer
+	latest: digest: sha256:a207ca8a53ecd9f966fb5bc0f790bc53475ee3040aa1a7d702c17d7e4e03e335 size: 11678
+

@@ -271,7 +271,7 @@
 | xmllint validation | `xmllint --valid --encode utf-8 Autounattend.xml` |
 | xslt transformation | `xml tr test.xsl test.xml` |
 | xml inplace editing | `xml ed --inplace -u "//ovf:VirtualSystem/ovf:OperatingSystemSection/ovf:Description" -v "THIS IS A TEST1" test.xml` |
-| yaml validation | `ruby -e "require 'yaml';puts YAML.load_file('cf_ocp_1M1A_NoVolAtt.yaml')"` |
+| yaml validation | `ruby -e "require 'yaml';puts YAML.load_file('cf_ocp_1M1A_NoVolAtt.yaml')"`  or `ruby -ryaml -e "p YAML.load(STDIN.read)" < seLinuxAutoRelabel.yml`|
 
 
 | Description |  Detail |

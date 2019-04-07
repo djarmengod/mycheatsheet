@@ -6,3 +6,4 @@
 | Retain remote files | export ANSIBLE_KEEP_REMOTE_FILES=1 |
 | Disable host key checking | export ANSIBLE_HOST_KEY_CHECKING=False |
 | Updating ansible roles path example | ANSIBLE_ROLES_PATH=${DEFAULT_ROLES_PATH}:/usr/share/ansible/openshift-ansible/roles ansible-playbook -i inventory/hosts /usr/share/ansible/openshift-ansible/playbooks/openshift-node/scaleup.yml |
+| Upgrade ansible | pip install --upgrade ansible |

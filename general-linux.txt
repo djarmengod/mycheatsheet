@@ -1,3 +1,7 @@
 Resize LVM (by extents):
 	lvextend -l +380 /dev/vg1/nexuslv
 	resize2fs /dev/vg1/nexuslv
+
+/de/null
+The /dev/null file is a special system device file that discards anything and everything written to it, and when used as the input file, returns End Of File immediately.
+
