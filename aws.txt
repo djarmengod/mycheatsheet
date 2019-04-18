@@ -29,6 +29,12 @@ aws cli:
 		aws ec2 describe-availability-zones --region us-east-2
 ```
 
+## Placement Group
+Create a Placement Group with Partition Strategy
+```
+aws ec2 create-placement-group --group-name "Test" --strategy "partition" --partition-count 3 --region us-east-1
+```
+
 ## Validate Cloudformation Template 
 ```
 aws cloudformation validate-template --template-body file://ec2CF.json
