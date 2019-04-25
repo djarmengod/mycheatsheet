@@ -53,3 +53,25 @@ Pull the Image from ECR
 ```
 docker pull $repositoryUri
 ```
+
+## RDS Related:
+
+Creating Read Replicas
+```
+aws rds create-db-instance-read-replica \
+    --db-instance-identifier myreadreplica \
+    --source-db-instance-identifier mydbinstance
+```
+
+Create Read Replica in Difference Region - Source DB instance provide ARN
+```
+aws rds create-db-instance-read-replica \
+    --db-instance-identifier DBInstanceIdentifier \
+    --region us-west-2 \
+    --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance     
+```
+
+Get CODEPipeline as Code
+```
+aws codepipeline get-pipeline --name PIPELINE_NAME
+```
