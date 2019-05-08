@@ -54,6 +54,18 @@ Pull the Image from ECR
 docker pull $repositoryUri
 ```
 
+## Flip Cloudformation templates between YAML and JSON
+```
+pip install cfn_flip
+
+cfn-flip -i yaml -o json fargateClusterTemplates/fargateCluster.yml
+
+```
+
+## Code Commit
+git remote set-url origin ssh://SSH_KEY_ID@git-codecommit.us-east-1.amazonaws.com/v1/repos/cfAutomationBase
+
+
 ## RDS Related:
 
 Creating Read Replicas
@@ -63,7 +75,7 @@ aws rds create-db-instance-read-replica \
     --source-db-instance-identifier mydbinstance
 ```
 
-Create Read Replica in Difference Region - Source DB instance provide ARN
+Create Read Replica in Different Region - Source DB instance provide ARN
 ```
 aws rds create-db-instance-read-replica \
     --db-instance-identifier DBInstanceIdentifier \
@@ -75,3 +87,5 @@ Get CODEPipeline as Code
 ```
 aws codepipeline get-pipeline --name PIPELINE_NAME
 ```
+
+
