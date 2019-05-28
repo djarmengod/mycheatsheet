@@ -5,6 +5,9 @@ TMUX Verify:
 	tmux -v
 TMUX attach: 
 	tmux a -t 4
+
+Prefix: Default prefix is ctrl+b and note that you must let go of the prefix before entering the command key.
+
 Recording Tmux session:
 	setup your tmux session (tmux new -s session-name, create windows, splits, start processes in them)
 	detach (prefix+d)
