@@ -88,4 +88,14 @@ Get CODEPipeline as Code
 aws codepipeline get-pipeline --name PIPELINE_NAME
 ```
 
+Serverless
+
+Install webpack plugin
+```
+serverless plugin install --name serverless-webpack --stage dev
+```
+Install AWS Alerts Plugin
+```
+npm install serverless-plugin-aws-alerts
+```
 
