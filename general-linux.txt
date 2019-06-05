@@ -1,3 +1,7 @@
+lsns - 
+	lsns lists information about all the currently accessible namespaces or about the given namespace.  The namespace identifier is an inode number.
+	If you have util-linux v2.28 or above you can use lsns
+
 Resize LVM (by extents):
 	lvextend -l +380 /dev/vg1/nexuslv
 	resize2fs /dev/vg1/nexuslv

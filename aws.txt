@@ -62,9 +62,16 @@ cfn-flip -i yaml -o json fargateClusterTemplates/fargateCluster.yml
 
 ```
 
-## Code Commit
+## CodeCommit
 git remote set-url origin ssh://SSH_KEY_ID@git-codecommit.us-east-1.amazonaws.com/v1/repos/cfAutomationBase
 
+Sample ~/.ssh/config configuration
+```
+Host git-codecommit.us-east-1.amazonaws.com
+   User SSH_KEY_ID
+   IdentityFile ~/.ssh/id_rsa
+
+```
 
 ## RDS Related:
 
