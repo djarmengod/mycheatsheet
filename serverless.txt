@@ -1,0 +1,14 @@
+# Installing the serverless cli
+npm install -g serverless
+# Updating serverless from a previous version of serverless
+npm update -g serverless
+
+Build:
+	sls package --stage dev --package package/dev
+	sls package --stage test --package package/test
+	sls package --stage prod --package package/prod
+
+Deploy:
+	sls deploy --stage dev --package package/dev
+	sls deploy --stage test --package package/test
+	sls deploy --stage prod --package package/prod
