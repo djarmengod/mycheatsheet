@@ -10,7 +10,7 @@
 | Assume IAM Role | aws sts assume-role --role-arn arn:aws:iam::123456789012345:role/NonProdRoute53UpdateRole --role-session-name "DNSUpdate" | grep -E '(SecretAccessKey|SessionToken|AccessKeyId)' |
 
 
-aws cli:
+## aws cli:
 ```
 	~/.aws/credentials
 		[blue]
@@ -35,7 +35,20 @@ Create a Placement Group with Partition Strategy
 aws ec2 create-placement-group --group-name "Test" --strategy "partition" --partition-count 3 --region us-east-1
 ```
 
-## Validate Cloudformation Template 
+## CloudFormation
+### Create Stack via CLI
+```
+aws cloudformation create-stack --stack-name testCert --template-body file:///Users/kiran/Documents/python/cfAutomationBase/qa/certs/tapiWaterJi.json
+```
+
+### Flip Cloudformation templates between YAML and JSON
+```
+pip install cfn_flip
+
+cfn-flip -i yaml -o json fargateClusterTemplates/fargateCluster.yml
+
+```
+### Validate Cloudformation Template
 ```
 aws cloudformation validate-template --template-body file://ec2CF.json
 ```
@@ -54,14 +67,6 @@ Pull the Image from ECR
 docker pull $repositoryUri
 ```
 
-## Flip Cloudformation templates between YAML and JSON
-```
-pip install cfn_flip
-
-cfn-flip -i yaml -o json fargateClusterTemplates/fargateCluster.yml
-
-```
-
 ## CodeCommit
 git remote set-url origin ssh://SSH_KEY_ID@git-codecommit.us-east-1.amazonaws.com/v1/repos/cfAutomationBase
 
@@ -75,14 +80,14 @@ Host git-codecommit.us-east-1.amazonaws.com
 
 ## RDS Related:
 
-Creating Read Replicas
+### Creating Read Replicas
 ```
 aws rds create-db-instance-read-replica \
     --db-instance-identifier myreadreplica \
     --source-db-instance-identifier mydbinstance
 ```
 
-Create Read Replica in Different Region - Source DB instance provide ARN
+### Create Read Replica in Different Region - Source DB instance provide ARN
 ```
 aws rds create-db-instance-read-replica \
     --db-instance-identifier DBInstanceIdentifier \
@@ -90,18 +95,19 @@ aws rds create-db-instance-read-replica \
     --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:my-mysql-instance     
 ```
 
-Get CODEPipeline as Code
+## AWS Code Pipeline
+### Get CODEPipeline as Code
 ```
 aws codepipeline get-pipeline --name PIPELINE_NAME
 ```
 
-Serverless
+##Serverless
 
-Install webpack plugin
+### Install webpack plugin
 ```
 serverless plugin install --name serverless-webpack --stage dev
 ```
-Install AWS Alerts Plugin
+### Install AWS Alerts Plugin
 ```
 npm install serverless-plugin-aws-alerts
 ```
