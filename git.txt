@@ -14,3 +14,25 @@
 | To unstage a file which was staged for commit | git reset HEAD somewhere/somefile.someextension - File goes back to being not staged for commit|
 | Show files in a commit | git show --pretty="" --name-only c1035fdddc1d7eb4486c2ac9733fc15943362cce |
 | Git check ignore | git check-ignore * |
+
+
+Branch Types:
+1. Local branch tracking remote
+2. Local branch not tracking any remote
+3. Remote branch not in local
+
+Create Local Branches tracking the Remotes.
+for remote in `git branch -r`; do git branch --track ${remote#origin/} $remote; done
+
+git fetch --all
+* fetch updates local copies of remote branches so this is always safe for your local branches BUT:
+* fetch will not update local branches (which track remote branches); if you want to update your local branches you still need to pull every branch.
+* fetch will not create local branches (which track remote branches), you have to do this manually.
+
+To update local branches which track remote branches:
+git pull --all
+
+$ git checkout -b release origin/release
+Branch 'release' set up to track remote branch 'release' from 'origin'.
+Switched to a new branch 'release'
+
