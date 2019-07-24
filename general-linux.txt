@@ -13,3 +13,11 @@ Popular Linux Distros
 2. Debian --> ubuntu, BOSS (Bharat Operating System Solutions)
 3. OpenSUSE --> SUSE Linux Enterprise
 4. ChromeOS --> Based on Chromium OS that only runs on Chromebooks, Chromeboxes and tablet computers.
+
+Package Format:
+1. Fedora and its derivatives - rpm (Red Hat Package Manager /etc/yum and /etc/yum.repos.d)
+2. Debian and its derivatives - apt (Advanced Package Tool - /etc/apt)
+
+Package Management Clients:
+1. Fedora and its derivatives - RPMS - yum (Yellowdog Updater, Modified)
+2. Debian and its derivatives - APTs - apt-get
