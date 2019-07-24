@@ -1,11 +1,15 @@
+
+
 lsns - 
 	lsns lists information about all the currently accessible namespaces or about the given namespace.  The namespace identifier is an inode number.
 	If you have util-linux v2.28 or above you can use lsns
 
-Resize LVM (by extents):
-	lvextend -l +380 /dev/vg1/nexuslv
-	resize2fs /dev/vg1/nexuslv
-
-/de/null
+/dev/null
 The /dev/null file is a special system device file that discards anything and everything written to it, and when used as the input file, returns End Of File immediately.
 
+
+Popular Linux Distros
+1. Fedora --> RHEL --> CentOS, Oracle Linux
+2. Debian --> ubuntu, BOSS (Bharat Operating System Solutions)
+3. OpenSUSE --> SUSE Linux Enterprise
+4. ChromeOS --> Based on Chromium OS that only runs on Chromebooks, Chromeboxes and tablet computers.
