@@ -16,10 +16,12 @@
 | Git check ignore | git check-ignore * |
 
 
+git remote show origin - Shows all the branches on the remote, including those that are not tracked locally and even those that have not yet been fetched.
+
 Branch Types:
-1. Local branch tracking remote
-2. Local branch not tracking any remote
-3. Remote branch not in local
+1. Local branch tracking remote - git branch -r
+2. Local branch not tracking any remote - git branch
+3. Remote branch not in local - git fetch --all && git branch -r
 
 Create Local Branches tracking the Remotes.
 for remote in `git branch -r`; do git branch --track ${remote#origin/} $remote; done
