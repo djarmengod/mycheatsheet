@@ -27,6 +27,13 @@ $ git checkout -b release origin/release
 Branch 'release' set up to track remote branch 'release' from 'origin'.
 Switched to a new branch 'release'
 
+Checkout by commit hash
+git checkout <commit_sha>
+git checkout -b <new_branch> <commit_sha>
+
+Checkout by tag
+git fetch && git fetch --tags && git checkout v1.19
+
 | Compare branches - Shows a brief overview of all the commits that are in some-feature that are not in master. | git log --oneline master..some-feature |
 | Show git config | git config --list |
 | Delete remote branch | git push origin --delete BRANCH_NAME |
