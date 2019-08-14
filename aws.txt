@@ -10,6 +10,18 @@
 | Assume IAM Role | aws sts assume-role --role-arn arn:aws:iam::123456789012345:role/NonProdRoute53UpdateRole --role-session-name "DNSUpdate" | grep -E '(SecretAccessKey|SessionToken|AccessKeyId)' |
 
 
+## AWS ELB
+
+### Class Loadbalancer
+aws elb create-load-balancer --load-balancer-name ${clusterid}-public-master
+
+### ALB
+aws elbv2 create-load-balancer --name my-load-balancer
+
+### NLB
+aws elbv2 create-load-balancer --name my-load-balancer --type network
+
+
 ## aws cli:
 ```
 	~/.aws/credentials
