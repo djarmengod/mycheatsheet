@@ -41,6 +41,9 @@ aws elbv2 create-load-balancer --name my-load-balancer --type network
 		aws ec2 describe-availability-zones --region us-east-2
 ```
 
+## AWS IAM Certs
+aws iam upload-server-certificate --server-certificate-name ocpengcert --certificate-body file:///home/ec2-user/assets/env/domainName.cer --certificate-chain file:///home/ec2-user/assets/env/domain.chain.cer --private-key file:///home/ec2-user/assets/env/domain.key
+
 ## Placement Group
 Create a Placement Group with Partition Strategy
 ```
