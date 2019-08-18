@@ -1,4 +1,4 @@
-| AWS S3 Transfer acceleration | aws s3 cp installer.jar.gz s3://bucketname/keyname --region ap-southeast-2 --endpoint-url http://s3-buckets-acceleration-endpoint-name |
+| AWS S3 Transfer acceleration | aws s3 cp installer.jar.gz s3://bucketname/keyname --region REGION --endpoint-url http://s3-buckets-acceleration-endpoint-name |
 | List AZ's for a given region ex: For us-east-2 | aws ec2 describe-availability-zones --region us-east-2 |
 | List regions | aws ec2 describe-regions --output table |
 | List buckets | aws s3api list-buckets |
@@ -20,7 +20,11 @@ aws elbv2 create-load-balancer --name my-load-balancer
 
 ### NLB
 aws elbv2 create-load-balancer --name my-load-balancer --type network
-
+aws elbv2 describe-load-balancers --names my-load-balancer
+aws elbv2 describe-load-balancer-attributes --load-balancer-arn arn:aws:elasticloadbalancing:REGION:ACCOUNTID:loadbalancer/net/test/85e25bf9762f3cac
+aws elbv2 describe-listeners --load-balancer-arn arn:aws:elasticloadbalancing:REGION:ACCOUNTID:loadbalancer/net/test/85e25bf9762f3cac
+aws elbv2 describe-target-groups --load-balancer-arn  arn:aws:elasticloadbalancing:REGION:ACCOUNTID:loadbalancer/net/test/85e25bf9762f3cac
+aws elbv2 describe-target-group-attributes --target-group-arn arn:aws:elasticloadbalancing:REGION:ACCOUNTID:targetgroup/test1/bf87b3db64bf2114
 
 ## aws cli:
 ```
