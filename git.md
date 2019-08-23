@@ -74,6 +74,7 @@ git fetch && git fetch --tags && git checkout v1.19
 ```
 
 ## General Notes
+```
 | Compare branches - Shows a brief overview of all the commits that are in some-feature that are not in master. | git log --oneline master..some-feature |
 | Show git config | git config --list |
 | Delete remote branch | git push origin --delete BRANCH_NAME |
@@ -90,3 +91,4 @@ git fetch && git fetch --tags && git checkout v1.19
 | To unstage a file which was staged for commit | git reset HEAD somewhere/somefile.someextension - File goes back to being not staged for commit|
 | Show files in a commit | git show --pretty="" --name-only c1035fdddc1d7eb4486c2ac9733fc15943362cce |
 | Git check ignore | git check-ignore * |
+```
