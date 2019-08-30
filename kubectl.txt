@@ -34,3 +34,15 @@ Log Level kubectl:
 --v=7	Display HTTP request headers.
 --v=8	Display HTTP request contents.
 --v=9	Display HTTP request contents without truncation of contents.
+
+--------------------
+minikube related:
+--------------------
+To check if virtualization is supported on macOS, run the following command on your terminal.
+```
+~/Documents/GIT ⌚ 15:39:47
+$ sysctl -a | grep -E --color 'machdep.cpu.features|VMX'
+machdep.cpu.features: FPU VME DE PSE TSC MSR PAE MCE CX8 APIC SEP MTRR PGE MCA CMOV PAT PSE36 CLFSH DS ACPI MMX FXSR SSE SSE2 SS HTT TM PBE SSE3 PCLMULQDQ DTES64 MON DSCPL VMX EST TM2 SSSE3 FMA CX16 TPR PDCM SSE4.1 SSE4.2 x2APIC MOVBE POPCNT AES PCID XSAVE OSXSAVE SEGLIM64 TSCTMR AVX1.0 RDRAND F16C
+
+~/Documents/GIT ⌚ 15:40:15
+```
