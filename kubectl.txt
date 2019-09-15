@@ -45,4 +45,51 @@ $ sysctl -a | grep -E --color 'machdep.cpu.features|VMX'
 machdep.cpu.features: FPU VME DE PSE TSC MSR PAE MCE CX8 APIC SEP MTRR PGE MCA CMOV PAT PSE36 CLFSH DS ACPI MMX FXSR SSE SSE2 SS HTT TM PBE SSE3 PCLMULQDQ DTES64 MON DSCPL VMX EST TM2 SSSE3 FMA CX16 TPR PDCM SSE4.1 SSE4.2 x2APIC MOVBE POPCNT AES PCID XSAVE OSXSAVE SEGLIM64 TSCTMR AVX1.0 RDRAND F16C
 
 ~/Documents/GIT ⌚ 15:40:15
+
+~/Documents/GIT/mycheatsheet on  master! ⌚ 15:42:37
+$ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64 \
+  && chmod +x minikube
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 54.2M  100 54.2M    0     0  4475k      0  0:00:12  0:00:12 --:--:-- 2820k
+
+~/Documents/GIT/mycheatsheet on  master! ⌚ 15:43:15
+$ sudo mv minikube /usr/local/bin
+Password:
+
+~/Documents/GIT/mycheatsheet on  master! ⌚ 15:43:29
+
+~/Documents/Labs/kubefed ⌚ 15:45:30
+$ minikube start -p cluster1 --kubernetes-version v1.13.4
+😄  [cluster1] minikube v1.3.1 on Darwin 10.13.6
+💿  Downloading VM boot image ...
+minikube-v1.3.0.iso.sha256: 65 B / 65 B [--------------------] 100.00% ? p/s 0s
+minikube-v1.3.0.iso: 131.07 MiB / 131.07 MiB [-------] 100.00% 6.50 MiB p/s 20s
+🔥  Creating virtualbox VM (CPUs=2, Memory=2000MB, Disk=20000MB) ...
+🐳  Preparing Kubernetes v1.13.4 on Docker 18.09.8 ...
+💾  Downloading kubeadm v1.13.4
+💾  Downloading kubelet v1.13.4
+🚜  Pulling images ...
+🚀  Launching Kubernetes ...
+⌛  Waiting for: apiserver proxy etcd scheduler controller dns
+🏄  Done! kubectl is now configured to use "cluster1"
+
+~/Documents/Labs/kubefed ⌚ 15:49:58
+$ minikube start -p cluster2 --kubernetes-version v1.13.4
+😄  [cluster2] minikube v1.3.1 on Darwin 10.13.6
+🔥  Creating virtualbox VM (CPUs=2, Memory=2000MB, Disk=20000MB) ...
+🐳  Preparing Kubernetes v1.13.4 on Docker 18.09.8 ...
+🚜  Pulling images ...
+🚀  Launching Kubernetes ...
+⌛  Waiting for: apiserver proxy etcd scheduler controller dns
+🏄  Done! kubectl is now configured to use "cluster2"
+
+~/Documents/Labs/kubefed ⌚ 16:13:19
+$
+```
+
+## Adhoc Commands
+List all resource types in a format that can be used with kubectl get
+```
+kubectl api-resources --verbs=list -o name | xargs -n 1 kubectl get -o name
 ```
