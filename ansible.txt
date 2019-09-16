@@ -7,3 +7,4 @@
 | Disable host key checking | export ANSIBLE_HOST_KEY_CHECKING=False |
 | Updating ansible roles path example | ANSIBLE_ROLES_PATH=${DEFAULT_ROLES_PATH}:/usr/share/ansible/openshift-ansible/roles ansible-playbook -i inventory/hosts /usr/share/ansible/openshift-ansible/playbooks/openshift-node/scaleup.yml |
 | Upgrade ansible | pip install --upgrade ansible or  pip install ansible --upgrade|
+| Disable host key checking - can be done at global config and inventory level too| export ANSIBLE_HOST_KEY_CHECKING=False |
