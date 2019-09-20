@@ -75,3 +75,5 @@
 | Project level exports | oc export all -o json > project.json for JSON and oc export all -o yaml > project.yaml for YAML |
 | Export other project level objects | for object in rolebindings serviceaccounts secrets imagestreamtags podpreset cms egressnetworkpolicies rolebindingrestrictions limitranges resourcequotas pvcs templates cronjobs statefulsets hpas deployments replicasets poddisruptionbudget endpoints do; oc export $object -o yaml > $object.yaml done; |
 | Deployment config enable trigger | oc set triggers dc/dcname --from-config |
+
+| Filter events by time | `oc get events --sort-by='.metadata.creationTimestamp'` |
