@@ -77,3 +77,7 @@
 | Deployment config enable trigger | oc set triggers dc/dcname --from-config |
 
 | Filter events by time | `oc get events --sort-by='.metadata.creationTimestamp'` |
+
+
+One liners
+for pod in `oc get pods -o wide | awk '{print $1}' | grep -v NAME`; do echo "-------------------------------$pod------------------------";oc logs --tail=1000 $pod; done
