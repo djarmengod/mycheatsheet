@@ -81,3 +81,7 @@
 
 One liners
 for pod in `oc get pods -o wide | awk '{print $1}' | grep -v NAME`; do echo "-------------------------------$pod------------------------";oc logs --tail=1000 $pod; done
+
+
+Login with admin kubeconfig
+oc login -u system:admin  --config=admin.kubeconfig
