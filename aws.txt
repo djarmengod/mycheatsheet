@@ -131,3 +131,13 @@ serverless plugin install --name serverless-webpack --stage dev
 npm install serverless-plugin-aws-alerts
 ```
 
+### Install Python
+```
+brew install python3
+```
+
+### Virtual Environments
+```
+brew install pipenv
+```
+
