@@ -73,6 +73,11 @@ git checkout -b <new_branch> <commit_sha>
 git fetch && git fetch --tags && git checkout v1.19
 ```
 
+### Checkout a specific file from a specific commit
+```
+git checkout COMMITHASH -- myfile.ext
+```
+
 ## General Notes
 ```
 | Compare branches - Shows a brief overview of all the commits that are in some-feature that are not in master. | git log --oneline master..some-feature |
