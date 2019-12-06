@@ -96,6 +96,25 @@ Host git-codecommit.us-east-1.amazonaws.com
    IdentityFile ~/.ssh/id_rsa
 
 ```
+## API Gateway Related
+```
+aws apigateway create-rest-api --name 'APIGW' --region us-east-1  
+aws apigateway get-resources --rest-api-id RESTAPI_ID --region us-east-1
+aws apigateway put-method --rest-api-id RESTAPI_ID --resource-id RESOURCE_ID --http-method GET --authorization-type "NONE" --region us-east-1
+aws apigateway put-integration --rest-api-id RESTAPI_ID --resource-id RESOURCE_ID --http-method GET --type HTTP_PROXY  --integration-http-method GET --connection-type VPC_LINK --connection-id VPCLINK_ID --region us-east-1 --uri http://myapi.mydomain.com
+aws apigateway create-deployment --rest-api-id 6vivk93vy0 --stage-name test --variables vpcLinkId=nij6zv --region us-east-1
+aws apigateway get-api-keys --include-values --query 'items[*].[name,value]' --name-query myapi
+
+
+```
+## VPC Link
+```
+aws apigateway create-vpc-link --name fargate-nlb-link --target-arns NLB_ARN --endpoint-url https://apigateway.us-east-1.amazonaws.com --region us-east-1
+
+aws apigateway get-vpc-link --vpc-link-id nij6zv --region us-east-1   
+
+```
+
 
 ## RDS Related:
 
@@ -145,3 +164,4 @@ brew install pipenv
 ```
 pip3 install awscli --upgrade --user
 ```
+
