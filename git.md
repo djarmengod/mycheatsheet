@@ -78,6 +78,15 @@ git fetch && git fetch --tags && git checkout v1.19
 git checkout COMMITHASH -- myfile.ext
 ```
 
+### Checkout Remote "release" as Local "authtest" and push Local "authtest" as Remote "newauthtest"
+```
+git checkout -b authtest origin/release
+git push origin  authtest:newauthtest
+
+Update the Local "authtest" branch to point to the New Remote "origin/newauthtest"
+git branch -u origin/newauthtest authtest
+```
+
 ## General Notes
 ```
 | Compare branches - Shows a brief overview of all the commits that are in some-feature that are not in master. | git log --oneline master..some-feature |
