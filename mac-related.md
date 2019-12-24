@@ -13,3 +13,10 @@ Another active Homebrew update process is already in progress.
 ```
 rm -rf /usr/local/var/homebrew/locks
 ```
+
+## Magnify Portions of a Screen
+```
+CMD+OPT+8 to Toggle On and Off
+CMD+OPT++ to magnify
+CMD+OPT+- to minimise
+```
