@@ -87,6 +87,16 @@ Update the Local "authtest" branch to point to the New Remote "origin/newauthtes
 git branch -u origin/newauthtest authtest
 ```
 
+## Working Tree Related
+### Remove local untracked files
+```
+To list what will be removed:
+git clean -n
+
+To Force remove:
+git clean -f
+```
+
 ## General Notes
 ```
 | Compare branches - Shows a brief overview of all the commits that are in some-feature that are not in master. | git log --oneline master..some-feature |
