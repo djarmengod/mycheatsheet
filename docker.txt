@@ -4,9 +4,15 @@ Container network namespace: ls -lart /var/run/docker/netns
 
 Check if a network interface is veth: ip -d link show | grep veth
 
+Remove Unused Images (including dangling ones), Containers, Networks
+docker system prune -af
+
 Get container pid: 
 	docker inspect --format '{{.State.Pid}}' kafka-docker_zookeeper_1 
 	docker inspect kafka-docker_zookeeper_1 | grep -iw pid
+
+
+
 
 List namespaces for a process and get link info:
 	[root@ip-172-31-44-31 netns]# ls -l /proc/21508/ns
