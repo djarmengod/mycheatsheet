@@ -5,7 +5,7 @@
 2. Users and groups of users are shared across the entire cluster, but no other data is shared across databases. 
 3. Any given client connection to the server can access only the data in a single database, the one specified in the connection request.
 4. A Schema is a Namespace that contains named database objects such as tables, views, indexes, data types, functions, and operators. A Database contains  one or more named Schemas, which in turn contain Tables. Default Schema name is "public".
-5. See info about Tablespaces below.
+5. See info about Tablespaces, Schemas below.
 6. Schemas provide a Logical separation of data, while tablespaces provide a Physical separation.
 7. Schema Search Path - When we refer to a table using just its name, PostgreSQL searches for the table by using something called a schema search path, which is a list of schemas to look in.
 8. Only objects that hold data, like tables and indexes, have a tablespace clause in their CREATE statement. A schema does not have an associated data file.
