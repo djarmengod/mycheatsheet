@@ -1,3 +1,6 @@
+
+psql -U postgres
+
 | List databases along with their tablespace names | \l+ |
 | List users | \du |
 | List schemas | \dn |
