@@ -41,6 +41,11 @@ git commit
 for remote in `git branch -r`; do git branch --track ${remote#origin/} $remote; done
 ```
 
+Commits that inovolved a Specific Files
+```
+git log --follow -- filename
+```
+
 ### General fetch
 ```
 git fetch --all
