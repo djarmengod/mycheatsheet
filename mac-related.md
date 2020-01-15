@@ -5,6 +5,13 @@
 2. Credentials (if any) - Ex: AWS, Docker credentials
 3. ~/.zshrc
 
+### Tools
+#### vmap - Virtual Memory Map of process - Details of writeable and non-writeable regions of memeory for a given process 
+```
+vmmap --wide PID
+```
+
+
 ### Install following from brew
 ```
 brew install python3
@@ -26,7 +33,14 @@ Ex: AdoptOpenJDK will install into /Library/Java/JavaVirtualMachines/
 Then set JAVA_HOME as follows: Example here is for Java8
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8-openj9.jdk/Contents/Home
 ```
+### Install Kube Tools
+```
+Kubectl Debug:
+brew install aylei/tap/kubectl-debug
 
+Ksync:
+curl https://ksync.github.io/gimme-that/gimme.sh | bash
+```
 
 ### Install iterm
 ### Configure bash aliases
