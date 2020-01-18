@@ -1,8 +1,10 @@
 ## Clean-Up Policies:
 1. Define Clean-Up Policy
 2. Attach the Clean-Up policy to a Repository
-[Cleanup Policy](images/nexus/cleanUpPolicy.png)
-[Cleanup Policy Attachment](images/nexus/cleanUpPolicyAttachment.png)
+
+![Cleanup Policy](images/nexus/cleanUpPolicy.png)
+
+![Cleanup Policy Attachment](images/nexus/cleanUpPolicyAttachment.png)
 
 ## Nexus Blob Compaction
 ```
@@ -64,5 +66,5 @@ After Blob Compaction
 4.0K	upgrades
 [root@ip-172-xx-xx-xx nexus-data]#
 ```
-[Blob Compaction Job](images/nexus/blobCompactionJob.png)
+![Blob Compaction Job](images/nexus/blobCompactionJob.png)
 
