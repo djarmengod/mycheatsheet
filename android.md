@@ -23,6 +23,9 @@ $ tree
 ~/Documents/GIT/project/app/build/outputs on  develop! ⌚ 15:53:41
 ```
 
+### Launcher Icon Name
+<string name="app_name" translatable="false">waterji</string> in app/src/main/res/values/strings.xml
+
 ### Create Keys and Keystore
 ```
 $ keytool -genkey -v -keystore service.keystore -alias service -keyalg RSA -keysize 4096 -validity 3650
