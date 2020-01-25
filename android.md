@@ -23,6 +23,10 @@ $ tree
 ~/Documents/GIT/project/app/build/outputs on  develop! ⌚ 15:53:41
 ```
 
+### Protect against Reverse Engineering
+In the release build type, we obfuscate the code using ProGuard to prevent reverse engineering.
+
+
 ### Launcher Icon Name
 <string name="app_name" translatable="false">waterji</string> in app/src/main/res/values/strings.xml
 
@@ -109,6 +113,7 @@ PROJWAR_RELEASE_STORE_PASSWORD=MASKED
 PROJWAR_RELEASE_KEY_PASSWORD=MASKED
 
 ~/Documents/GIT/projwar/projrji-mobile-android on  develop! ⌚ 16:16:51
+```
 
 #### Update your build.gradle to define and use the signing config.
 
