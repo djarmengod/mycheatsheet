@@ -1,4 +1,10 @@
 -------------------------
+Get all Pods with ExitCode > 0 and more than 1 Restart
+-------------------------
+kgp --all-namespaces -o json | jq '.items[].status.containerStatuses[]? | select((.restartCount >= 1) and .lastState.terminated.exitCode > 0)  | {restartCount: .restartCount, exitCode: .lastState.terminated.exitCode, image: .image}'
+
+
+-------------------------
 Node Cordon:
 -------------------------
 Uncordon a node - kubectl uncordon
