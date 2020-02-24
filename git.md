@@ -11,6 +11,44 @@ git mergetool
 ```
 ![Git Merge](images/gitMerge.png)
 
+**Needs merge** and **error: you need to resolve your current index first** indicate that a merge failed, and that there are conflicts in those files. If you've decided that whatever merge you were trying to do was a bad idea after all, you can put things back to normal with
+
+git reset --merge
+
+### Manual approach
+```
+Find files with merge conflict
+
+cd project-folder
+Search for all conflicting files.
+
+grep -lr '<<<<<<<' .
+Above will list all files which has marker special marker <<<<<<< in them.
+
+Resolve easy/obvious conflicts
+At this point you may review each files. If solution is to accept local/our version, run:
+
+git checkout --ours PATH/FILE
+If solution is to accept remote/other-branch version, run:
+
+git checkout --theirs PATH/FILE
+If you have multiple files and you want to accept local/our version, run:
+
+grep -lr '<<<<<<<' . | xargs git checkout --ours
+If you have multiple files and you want to accept remote/other-branch version, run:
+
+grep -lr '<<<<<<<' . | xargs git checkout --theirs
+
+For complex conflicts
+For files that needs manual review/edit, use vim or any text editor to resolve differences.
+
+Make sure you run git add FILENAME for files edited using vim.
+
+Finally, review if all files are ready for commit using  git status
+
+And run git commit -am "MSG" followed by optional git push
+```
+
 ## Remotes
 ### List Remotes:
 ```
