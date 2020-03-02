@@ -1,5 +1,7 @@
 | Description |  Command |
 | --- | --- |
+
+| OCSP Test | `echo QUIT | openssl s_client -connect www.mydomain.com:443 -status 2> /dev/null` |
 | Add CA to certificate the npm trust store | `npm config set cafile C:\Users\Administrator\Downloads\CA_CHAIN.pem` |
 | Verify if the key-pairs match |  `diff  <(openssl x509 -in ssl.crt -pubkey -noout) <(openssl rsa -in ssl.key -pubout)` |
 | Create CSR from existing key-pair | `openssl req -sha256 -new -key domainName.key -out domainName.csr` |
@@ -25,7 +27,25 @@
 | Verify if the Private key matches a Cert/CSR | This can be done by a modulus check `openssl x509 -noout -modulus -in CERTIFICATE.crt | openssl md5` and `openssl req -noout -modulus -in CSR.csr | openssl md5` and `openssl rsa -noout -modulus -in PRIVATEKEY.key | openssl md5`
 | Connect to an endpoint with resolve ex: bypass load balancers | `curl -v https://sso-domain-name/auth/realms/3scale-sso/ --cacert /etc/pki/tls/zync/zync.pem --resolve sso-domain-name:443:IPADDR`
 
-Validate Hanshake - SSL_CERT_FILE=/etc/pki/tls/app/test.pem ruby -r net/http -e 'puts Net::HTTP.get_response(URI("https://example.com")).code'
+Validate Hanshake
+```
+SSL_CERT_FILE=/etc/pki/tls/app/test.pem ruby -r net/http -e 'puts Net::HTTP.get_response(URI("https://example.com")).code'
+```
 
-Show Certs - openssl s_client -showcerts -connect example.com:443 --servername example.com
-Verify a PrivateKey - openssl rsa -check -in kiran01bm-rh-gps-aws.pem -noout
+Show Certs (also sets the TLS SNI (Server Name Indication) extension in the ClientHello message)
+```
+openssl s_client -showcerts -connect example.com:443 --servername example.com
+openssl s_client -showcerts -connect IP:443 --servername example.com
+
+```
+
+Verify a PrivateKey
+```
+openssl rsa -check -in kiran01bm.pem -noout
+```
+
+OCSP
+```
+curl http://ocsp.example.org/$(urlencode `openssl ocsp -issuer issuer.pem -cert end_entity.pem -reqout - | base64 -w 0`) | openssl ocsp -respin - -text -CAfile rootca.pem
+```
+

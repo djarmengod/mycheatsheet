@@ -13,3 +13,5 @@ https://tools.ietf.org/html/rfc5735
 ## SNI
 https://www.ietf.org/rfc/rfc4366.txt
 
+## Certificate Path Validation
+https://tools.ietf.org/html/rfc5280
