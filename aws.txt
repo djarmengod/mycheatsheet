@@ -86,6 +86,11 @@ Pull the Image from ECR
 docker pull $repositoryUri
 ```
 
+Login
+```
+aws ecr get-login-password | docker login --username AWS --password-stdin https://ACCOUNTID.dkr.ecr.REGION.amazonaws.com
+```
+
 ## CodeCommit
 git remote set-url origin ssh://SSH_KEY_ID@git-codecommit.us-east-1.amazonaws.com/v1/repos/cfAutomationBase
 
