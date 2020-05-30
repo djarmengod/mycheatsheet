@@ -8,4 +8,5 @@
 
 **Production:** When you create a production release, this version of your app is available to all users in the countries you've targeted.
 
-
+### Notes
+Note: __**You can no longer create open alpha or closed beta tests.**__ You'll retain access to any existing open alpha or closed beta tests that are already in progress.
