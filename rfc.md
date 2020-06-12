@@ -26,7 +26,7 @@ https://tools.ietf.org/html/rfc6902
 ### JSON Merge Patch
 https://tools.ietf.org/html/rfc7386
 
-## Happy Eyeballs Version 2: Better Connectivity Using Concurrency
+## Happy Eyeballs Version 2: Better Connectivity Using Concurrency - Dualstack Clients
 Many communication protocols operating over the modern Internet use
    hostnames.  These often resolve to multiple IP addresses, each of
    which may have different performance and connectivity
